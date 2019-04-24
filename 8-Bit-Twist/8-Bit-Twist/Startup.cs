@@ -48,7 +48,12 @@ namespace _8_Bit_Twist
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseMvcWithDefaultRoute();
+
             app.UseStaticFiles();
+
+            app.UseAuthentication();
+
+
 
             if (env.IsDevelopment())
             {
