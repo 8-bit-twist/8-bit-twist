@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using _8_Bit_Twist.Data;
 using _8_Bit_Twist.Models;
+using _8_Bit_Twist.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -47,6 +48,7 @@ namespace _8_Bit_Twist
                 idConString = Configuration.GetConnectionString("ProductionIdConnection");
             }
 
+            // Add DB Context based on above toggle
             services.AddDbContext<_8BitDbContext>(options =>
                 options.UseSqlServer(appConString));
 
@@ -60,6 +62,9 @@ namespace _8_Bit_Twist
             // Uncomment below code to push updates to Production DB.
             //services.AddDbContext<_8BitDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionIdConnection")));
+
+            // Register Interfaces and Services
+            services.AddScoped<IInventoryManager, InventoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
