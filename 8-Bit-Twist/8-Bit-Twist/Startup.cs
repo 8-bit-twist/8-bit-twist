@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _8_Bit_Twist.Data;
+using _8_Bit_Twist.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,15 +35,31 @@ namespace _8_Bit_Twist
             services.AddMvc();
 
             // Toggle between Production and Dev depending on environment.
-            string connectionString = Environment.IsDevelopment()
-                                   ? Configuration["ConnectionStrings:DefaultConnection"]
-                                   : Configuration["ConnectionStrings:ProductionConnection"];
+            string appConString, idConString;
+            if (Environment.IsDevelopment())
+            {
+                appConString = Configuration.GetConnectionString("DefaultConnection");
+                idConString = Configuration.GetConnectionString("DefaultIdConnection");
+            }
+            else
+            {
+                appConString = Configuration.GetConnectionString("ProductionConnection");
+                idConString = Configuration.GetConnectionString("ProductionIdConnection");
+            }
 
             services.AddDbContext<_8BitDbContext>(options =>
-            options.UseSqlServer(connectionString));
+                options.UseSqlServer(appConString));
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(idConString));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             // Uncomment below code to push updates to Production DB.
             //services.AddDbContext<_8BitDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionIdConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,8 +70,6 @@ namespace _8_Bit_Twist
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
-
 
             if (env.IsDevelopment())
             {
