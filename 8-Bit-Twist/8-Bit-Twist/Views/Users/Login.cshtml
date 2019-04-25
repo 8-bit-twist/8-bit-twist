@@ -1,5 +1,5 @@
-﻿@model  _8_Bit_Twist.Models.ViewModels.LoginViewModel
-@{ 
+﻿@model _8_Bit_Twist.Models.ViewModels.LoginViewModel
+@{
     ViewData["Titel"] = "Login";
 }
 
@@ -7,14 +7,15 @@
 
 <form method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
-
-    <label asp-for="Email"></label>
-    <input asp-for="Email" />
-    <span asp-validation-for="Email" class="text-danger"></span>
-
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password" class="text-danger"></span>
-
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
     <button type="submit">Login</button>
 </form>
