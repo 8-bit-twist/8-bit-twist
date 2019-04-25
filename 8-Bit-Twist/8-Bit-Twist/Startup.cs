@@ -59,7 +59,11 @@ namespace _8_Bit_Twist
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Uncomment below code to push updates to Production DB.
+            // Uncomment below code to push updates ONLY to Local DB.
+            //services.AddDbContext<_8BitDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultIdConnection")));
+
+            // Uncomment below code to push updates ONLY to  Production DB.
             //services.AddDbContext<_8BitDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ProductionIdConnection")));
 

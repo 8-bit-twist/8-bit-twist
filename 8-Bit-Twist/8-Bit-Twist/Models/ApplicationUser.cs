@@ -10,5 +10,6 @@ namespace _8_Bit_Twist.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool Computer { get; set; }
     }
 }
