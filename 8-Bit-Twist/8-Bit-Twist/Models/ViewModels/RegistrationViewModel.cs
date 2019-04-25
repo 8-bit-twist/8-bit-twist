@@ -30,5 +30,8 @@ namespace _8_Bit_Twist.Models.ViewModels
         [Display(Name = "Confirm Password")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "Are you a computer?")]
+        public bool Computer { get; set; }
     }
 }
