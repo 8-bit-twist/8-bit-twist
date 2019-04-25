@@ -1,1 +1,50 @@
-﻿
+﻿body {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    padding: 1vh 1vw 1vh 1vw ;
+    width: 98vw;
+    height: 4vh;
+    min-height: 32px;
+}
+
+main {
+    padding: 1vh 1vw 1vh 1vw;
+    width: 98vw;
+    height: 92vh;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3vh;
+    line-height: 4vh;
+}
+
+h2 {
+    font-size: 2.5vh;
+}
+
+h3 {
+    font-size: 2.5vh;
+    font-style: italic;
+}
+
+@media screen and (max-height: 532px) {
+    h1 {
+        font-size: 16px;
+        line-height: 32px;
+    }
+
+    h2, h3 {
+        font-size: 13px;
+    }
+
+    main {
+        height: calc(96vh - 32px);
+    }
+}
+
