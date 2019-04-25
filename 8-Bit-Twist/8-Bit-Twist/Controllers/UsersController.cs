@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace _8_Bit_Twist.Controllers
@@ -41,14 +42,26 @@ namespace _8_Bit_Twist.Controllers
                     UserName = model.EmailAddress,
                     Email = model.EmailAddress,
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    Computer = model.Computer
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                    Claim emailClaim = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
+                    Claim computerClaim = new Claim("Computer", user.Computer.ToString());
+
+                    List<Claim> claims = new List<Claim> { nameClaim, emailClaim, computerClaim };
+
+                    await _userManager.AddClaimsAsync(user, claims);
+
+                    // Sign user in
                     await _signInManager.SignInAsync(user, false);
+
+                    // Redirect to home page
                     return RedirectToAction("Index", "Home");
                 }
             }
