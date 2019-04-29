@@ -1,2 +1,41 @@
-﻿body {
+﻿.lightblue {
+    background-color: #B5B6E4;
+    color: #211A21;
+}
+
+.lightgray {
+    background-color: #CEC9CC;
+    color: #4F43AE;
+}
+
+.medgray {
+    background-color: #908A99;
+    color: #211A21;
+}
+
+.darkblue {
+    background-color: #4F43AE;
+    color: #CEC9CC;
+}
+
+.darkgray {
+    background-color: #211A21;
+    color: #B5B6E4;
+}
+
+.play {
+    font-family: Play, sans-serif;
+}
+
+.press-start {
+    font-family: 'Press Start 2P', cursive;
+}
+
+#about {
+    line-height: 150%;
+    margin: auto;
+    padding: 2% ;
+    width: 88%;
+    margin-top: 1vh;
+    border-radius: 5px;
 }
