@@ -46,7 +46,7 @@ namespace _8_Bit_Twist.Controllers
                     Computer = model.Computer
                 };
 
-                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
