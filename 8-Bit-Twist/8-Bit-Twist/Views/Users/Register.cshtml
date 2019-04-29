@@ -6,27 +6,31 @@
 
 <h2>Create An Account</h2>
 <form method="post">
-    <!--TODO: fix validation summary-->
-    <div asp-validation-summary="All"></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div>
         <label asp-for="EmailAddress"></label>
         <input asp-for="EmailAddress" />
+        <span asp-validation-for="EmailAddress" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="LastName"></label>
         <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="Password"></label>
         <input asp-for="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="ConfirmPassword"></label>
         <input asp-for="ConfirmPassword" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
     <div>
         <label asp-for="Computer"></label>
