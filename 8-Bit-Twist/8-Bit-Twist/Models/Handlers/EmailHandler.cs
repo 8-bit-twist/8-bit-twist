@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace _8_Bit_Twist.Models.Handlers
 {
-    public class EmailHandler : AuthorizationHandler<EmailRequirements>
+    public class EmailHandler : AuthorizationHandler<EmailRequirement>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, EmailRequirements requirement)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, EmailRequirement requirement)
         {
             if (!context.User.HasClaim(c => c.Type == "Email"))
             {
