@@ -1,2 +1,9 @@
-﻿body {
+﻿nav * {
+    display: inline-block;
+    line-height: 4vh;
+}
+
+a, a:visited {
+    width: 15%;
+    text-decoration: 
 }

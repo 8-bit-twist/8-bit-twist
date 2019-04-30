@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
+    string action = ViewContext.RouteData.Values["action"].ToString();
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -10,11 +15,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
-    <header class="darkblue">
-        <h1 class="press-start">8-Bit Twist</h1>
+    <header class="darkblue press-start">
+        <h1 class="@(action == "Index" && controller == "Home" ? "deactivated" : "")">
+            <a asp-controller="Home" asp-action="Index">8-Bit Twist</a>
+        </h1>
+        <div class="toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        
+        <nav>
+            <ul>
+                <li class="@(action == "Login" && controller == "Users" ? "lightgray deactivated" : "")">
+                    <a asp-controller="Users" asp-action="Login">Login</a>
+                </li>
+                <li class="@(action == "Register" && controller == "Users" ? "lightgray deactivated": "")">
+                    <a asp-controller="Users" asp-action="Register">Register</a>
+                </li>
+            </ul>
+        </nav>
     </header>
     <main class="lightblue play">
         @RenderBody()
     </main>
+
+    <script>
+        $(document).ready(function() {
+            $(".fa-bars").click(function () {
+                $("nav").toggle();
+            });
+        });
+    </script>
 </body>
 </html>
