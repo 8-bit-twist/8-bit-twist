@@ -31,6 +31,18 @@
     font-family: 'Press Start 2P', cursive;
 }
 
+.deactivated a {
+    pointer-events: none;
+    cursor: default;
+}
+
+.toggle {
+    float: right;
+    cursor: pointer;
+    line-height: 4vh;
+    padding: 1vh;
+}
+
 #about {
     line-height: 150%;
     margin: auto;
@@ -39,3 +51,4 @@
     margin-top: 1vh;
     border-radius: 5px;
 }
+
