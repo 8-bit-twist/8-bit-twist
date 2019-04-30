@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _8_Bit_Twist.Models.Handlers
 {
-    public class EmailRequirements : IAuthorizationRequirement
+    public class EmailRequirement : IAuthorizationRequirement
     {
     }
 }

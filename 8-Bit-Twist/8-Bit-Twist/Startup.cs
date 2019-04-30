@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using _8_Bit_Twist.Data;
 using _8_Bit_Twist.Models;
+using _8_Bit_Twist.Models.Handlers;
 using _8_Bit_Twist.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -69,6 +71,15 @@ namespace _8_Bit_Twist
 
             // Register Interfaces and Services
             services.AddScoped<IInventoryManager, InventoryService>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ComputerPolicy", policy => policy.Requirements.Add(new ComputerRequirement()));
+                options.AddPolicy("EmailPolicy", policy => policy.Requirements.Add(new EmailRequirement()));
+            });
+
+            services.AddTransient<IAuthorizationHandler, ComputerHandler>();
+            services.AddScoped<IAuthorizationHandler, EmailHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
