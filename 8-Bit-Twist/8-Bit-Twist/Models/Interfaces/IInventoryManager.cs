@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace _8_Bit_Twist.Models.Interfaces
 {
-    interface IInventoryManager
+    public interface IInventoryManager
     {
-
-
         // Get a single product by ID
         Task<Product> GetProductByID(int id);
 
@@ -22,9 +20,9 @@ namespace _8_Bit_Twist.Models.Interfaces
         Task UpdateProduct(Product product);
 
         // Delete a product
-        void DeleteProduct(Product product);
+        Task DeleteProduct(Product product);
 
         // Check if a product exists by ID
-        bool ProductExists(int id);
+        Task<bool> ProductExists(int id);
     }
 }
