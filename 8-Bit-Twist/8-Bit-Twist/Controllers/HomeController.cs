@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace _8_Bit_Twist.Controllers
             return View();
         }
 
+        [Authorize(Policy = "ComputerPolicy")]
         public IActionResult Computer()
         {
             return View();

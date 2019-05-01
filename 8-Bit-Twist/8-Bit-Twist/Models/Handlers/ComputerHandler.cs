@@ -18,7 +18,7 @@ namespace _8_Bit_Twist.Models.Handlers
 
             var isComputer = context.User.FindFirst(c => c.Type == "Computer").Value;
 
-            if (isComputer == "true")
+            if (isComputer == "True")
             {
                 context.Succeed(requirement);
             }
