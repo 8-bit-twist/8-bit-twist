@@ -39,6 +39,12 @@
                         <a asp-controller="Users" asp-action="Register">Register</a>
                     </li>
                 }
+                else if (User.Claims.First(c => c.Type == "Computer").Value == "True")
+                {
+                    <li class="@(action == "Computer" && controller == "Home" ? "lightgray deactivated" : "")">
+                        <a asp-controller="Home" asp-action="Computer">11010001</a>
+                    </li>
+                }
             </ul>
         </nav>
     </header>
