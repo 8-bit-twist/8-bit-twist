@@ -1,5 +1,15 @@
-﻿@model List<_8_Bit_Twist.Models.Product>
+﻿@model List<Product>
 
 @{
     ViewData["Title"] = "Browse Consoles";
+}
+<h2 class="press-start">Browse Products</h2>
+@foreach (Product product in Model)
+{
+    <section class="product medgray">
+        <img src="@product.ImgUrl" />
+        <h4 class="press-start">@product.Name</h4>
+        <h5>$@product.Price</h5>
+        <p>@product.Description</p>
+    </section>
 }

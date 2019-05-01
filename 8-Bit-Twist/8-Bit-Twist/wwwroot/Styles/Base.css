@@ -21,6 +21,8 @@ main {
     padding-top: 8px;
     bottom: 0;
     text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -31,14 +33,26 @@ h1 {
 
 h2 {
     font-size: 2.5vh;
+    margin-bottom: .5em;
 }
 
 h3 {
     font-size: 2.5vh;
     font-style: italic;
+    
+}
+
+h4 {
+    margin-bottom: .5em;
+}
+
+h5 {
+    font-size: 1.5em;
+    margin-bottom: .5em;
 }
 
 a, a:visited {
     color: inherit;
     text-decoration: none;
 }
+

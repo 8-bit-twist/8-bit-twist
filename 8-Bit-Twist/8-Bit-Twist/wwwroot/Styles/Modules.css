@@ -8,6 +8,21 @@ header * {
 
 nav ul {
     float: right;
+    margin-right: 10px;
+}
+
+nav li {
+    padding: 5px;
+    height: calc(4vh - 10px);
+    line-height: calc(4vh - 10px);
+}
+
+.product img {
+    width: 20vw;
+    height: 20vw;
+    object-fit: cover;
+    float: left;
+    margin-right: 10px;
 }
 
 @media screen and (max-height: 532px) {
