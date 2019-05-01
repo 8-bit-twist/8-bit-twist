@@ -128,8 +128,9 @@ namespace _8_Bit_Twist.Data
                     ImgUrl = "https://imgur.com/GZ57bqX",
                     Generation = Generations.Three,
                     ReleaseDate = "2001-11-6",
-                }
-                );
+                });
         }
+
+        public DbSet<Product> Products { get; set; }
     }
 }
