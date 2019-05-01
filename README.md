@@ -1,50 +1,98 @@
-# ***Console Application README Example***
-------------------------------
 
-# Title
-#### Lab01-Exception-Handling
-##### *Author: Andrew Roska*
+# Project 8-Bit Twist
+---------------------------------
+## We are deployed on Azure!
 
-------------------------------
+https://8-bit-twist.azurewebsites.net/
 
-## Description
-***[Tell me about your application, should be about a paragraph]***
-This is a C# console application that will ask a user several questions about me, the
-developer. There are multiple question types ranging from inputting a number to True or False.
-At the end of the game the user receives their total score.
+**THIS SITE IS FOR LEARNING PURPOSES ONLY AND PURCHASES CANNOT BE MADE**
 
-------------------------------
+---------------------------------
+## Web Application
+The web application was written in C# using ASP.NET Core 2, Entity Framework Core, and the MVC framework and utilizes Razor views, HTML, and CSS. The application utilizes two SQL Databases for data storage.
 
-## Getting Started
-Clone this repository to your local machine.
-```
-$ git clone [repo clone url here]
-```
-#### To run the program from Visual Studio:
-Select ```File``` -> ```Open``` -> ```Project/Solution```
+This application simulates an e-commerce website.  Users can browse a virtual storefront of retro gaming consoles, view details about each individual item on offer, create a shopping basket of items they would like to purchase, and checkout through our secure checkout process.  Once a transaction is processed an email will be sent with a receipt, and users can view thier prior purchasing history at any time from their dashboard.
 
-Next navigate to the location you cloned the Repository.
+Users may view the site and contents without an account, but to add items to their cart they must first register with us.  User data is stored securely using encrypted hashtables. **NO PAYMENT INFORMATION IS STORED ON OUR DATABASE.**
 
-Double click on the ```Lab01-About-Me``` directory.
+---------------------------------
 
-Then select and open ```AboutMe.sln```
+## User Claims and Policies
+At time of registration Users are prompted to input their Email, First Name and Last Name, and Password.  Users are also prompted to check a box if they are a Computer.  We use this information to register specific claims about the user.  The claims registered are:
 
-------------------------------
+- The User's Full Name
+- The User's Email address
+- If the User considers themself a Computer or not
 
-## Visuals
-***[Add screenshots of your application in action]***
+We use the Full Name claim as a way to customize our welcome page for each individual.  We use the Email claim to prevent access to certain parts of the site unless the user registers with a particular domain (NYI).  We use the Computer claim to allow Users who identify as a computer to access a unique page just for them.  That page is restricted by a Policy, and after creating an account with the Computer box checked and signing in that page can be accessed by clicking the Binary Numbers on the right side of the Nav Bar.
 
-##### Application Start
-![Image 1](https://via.placeholder.com/750x500)
-##### Using the Application
-![Image 1](https://via.placeholder.com/750x500)
-##### Application End
-![Image 1](https://via.placeholder.com/750x500)
+---------------------------------
 
-------------------------------
+## Tools Used
+Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio Community 2019 (Version 16.0.3)
+
+- C#
+- ASP.Net Core
+- Entity Framework
+- MVC
+- xUnit
+- Azure
+
+---------------------------------
+
+## Data Model
+
+### Overall Project Schema
+
+#### Product Database Schema
+![Product Database Schema](/assets/img/8Bit-Twist_ProductDB.png)
+
+#### Model Properties and Requirements
+
+##### Product
+| Parameter | Type | Required |
+| --- | --- | --- |
+| ID  | int | YES |
+| SKU | string | YES |
+| Price | decimal | YES |
+| Description | string | YES |
+| ImageURL | ImageUrl | YES |
+| Generation | Enum | YES |
+| ReleaseDate | Date | YES |
+
+---------------------------
+
+#### User Database Schema
+![User Database Schema](/assets/img/8Bit-Twist_UserDB.png)
+
+#### Model Properties and Requirements
+
+##### ApplicationUser
+
+| Parameter | Type | Required |
+| --- | --- | --- |
+| ID  | int | YES |
+| UserName | string | YES |
+| Email | string | YES |
+| FirstName | string | YES |
+| LastName | string | YES |
+| Computer | bool |  |
+
+##### UserClaims
+| Parameter | Type | Required |
+| --- | --- | --- |
+| ID  | int | YES |
+| UserID (FK) | int | YES |
+| ClaimType | list | YES |
+| ClaimValue | list | YES |
+
+---------------------------
 
 ## Change Log
-***[The change log will list any changes made to the code base. This includes any changes from TA/Instructor feedback]***
-1.3: *Added summary comments to the methods* - 8 Nov 2010
-1.2: *Changed variable names to follow proper convention* - 6 Nov 2010
-1.1: *Added a Try/Catch/Finally for Question 2* - 5 Nov 2010
+1.0: *Initial Deployment* - 01 May 2019
+
+------------------------------
+
+## Authors
+Benjamin Taylor
+Andrew Roska
