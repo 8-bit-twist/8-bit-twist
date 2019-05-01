@@ -16,5 +16,10 @@ namespace _8_Bit_Twist.Controllers
         {
             return View();
         }
+
+        public IActionResult Computer()
+        {
+            return View();
+        }
     }
 }
