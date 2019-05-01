@@ -17,6 +17,17 @@ Users may view the site and contents without an account, but to add items to the
 
 ---------------------------------
 
+## User Claims and Policies
+At time of registration Users are prompted to input their Email, First Name and Last Name, and Password.  Users are also prompted to check a box if they are a Computer.  We use this information to register specific claims about the user.  The claims registered are:
+
+- The User's Full Name
+- The User's Email address
+- If the User considers themself a Computer or not
+
+We use the Full Name claim as a way to customize our welcome page for each individual.  We use the Email claim to prevent access to certain parts of the site unless the user registers with a particular domain (NYI).  We use the Computer claim to allow Users who identify as a computer to access a unique page just for them.  That page is restricted by a Policy, and after creating an account with the Computer box checked and signing in that page can be accessed by clicking the Binary Numbers on the right side of the Nav Bar.
+
+---------------------------------
+
 ## Tools Used
 Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio Community 2019 (Version 16.0.3)
 
