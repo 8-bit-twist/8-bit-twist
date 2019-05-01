@@ -37,10 +37,15 @@
 }
 
 .toggle {
+    margin-right: 1vw;
     float: right;
     cursor: pointer;
-    line-height: 4vh;
-    padding: 1vh;
+}
+
+#greeting {
+    float: left;
+    margin-left: 2vw;
+    font-size: 1.25vh;
 }
 
 #about {
@@ -51,4 +56,3 @@
     margin-top: 1vh;
     border-radius: 5px;
 }
-

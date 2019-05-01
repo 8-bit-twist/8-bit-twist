@@ -1,9 +1,57 @@
 ﻿nav * {
     display: inline-block;
-    line-height: 4vh;
 }
 
-a, a:visited {
-    width: 15%;
-    text-decoration: 
+header * {
+    line-height: calc(4vh + 8px);
+}
+
+nav ul {
+    float: right;
+}
+
+@media screen and (max-height: 532px) {
+    h1 {
+        font-size: 13.3px;
+    }
+
+    header * {
+        line-height: 32px;
+    }
+
+    h2, h3 {
+        font-size: 13px;
+    }
+
+    main {
+        height: calc(98vh - 32px);
+    }
+
+    #greeting {
+        font-size: 6.65px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    nav {
+        display: none;
+    }
+
+    nav ul {
+        float: left;
+        background-color: #4F43AE;
+        color: #CEC9CC;
+        width: 100vw;
+    }
+
+    nav li {
+        padding-left: 1vw;
+        display: block;
+    }
+}
+
+@media screen and (min-width: 961px) {
+    .toggle {
+        display: none;
+    }
 }
