@@ -45,6 +45,9 @@
                         <a asp-controller="Home" asp-action="Computer">11010001</a>
                     </li>
                 }
+                <li class="@(action == "Index" && controller == "Shop" ? "lightgray deactivated" : "")">
+                    <a asp-controller="Shop" asp-action="Index">Browse</a>
+                </li>
             </ul>
         </nav>
     </header>
