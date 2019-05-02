@@ -1,0 +1,10 @@
+﻿@model Product
+@{ 
+    ViewData["Title"] = "Product Details";
+}
+
+<h2 class="press-start">@Model.Name</h2>
+<h4>Release Date: @Model.ReleaseDate (Generation @Model.Generation)</h4>
+<h5>$@Model.Price</h5>
+<img class="product" src="@Model.ImgUrl"/>
+<p>@Model.Description</p>

@@ -40,9 +40,14 @@ namespace _8_Bit_Twist.Models
             return await _context.Products.ToListAsync();
         }
 
-        public Task<Product> GetProductByID(int id)
+        /// <summary>
+        /// Gets a Product by its ID.
+        /// </summary>
+        /// <param name="id">The Product's ID.</param>
+        /// <returns>A Product</returns>
+        public async Task<Product> GetProductByID(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Products.FindAsync(id);
         }
 
         public Task<bool> ProductExists(int id)
