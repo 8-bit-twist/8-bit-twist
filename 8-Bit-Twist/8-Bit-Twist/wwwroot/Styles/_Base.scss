@@ -1,0 +1,87 @@
+﻿body {
+    position: relative;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    font-size: 1.75vh;
+    line-height: 2.25vh;
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    height: 5vh;
+    line-height: 5vh;
+    min-height: 32px;
+    z-index: 4;
+
+    background-color: $darkblue;
+    color: $lightgray;
+    font-family: $press-start;
+    font-size: 1.75vh;
+}
+
+main {
+    position: absolute;
+    width: 100%;
+    height: 95vh;
+    text-align: center;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background-color: $lightblue;
+    color: $darkgray;
+    font-family: $play;
+}
+
+h1 {
+    font-size: 2.5vh;
+    margin-left: 10px;
+    float: left;
+
+    color: $lightgray !important;
+    background-color: $darkblue !important;
+}
+
+h2 {
+    margin: 1.25vh 0 1.25vh 0;
+    font-size: 2.25vh;
+    font-family: $press-start;
+}
+
+h3 {
+    font-size: 2.25vh;
+}
+
+section {
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    margin-top: 1.25vh;
+    border-radius: 10px;
+
+    background-color: $lightgray;
+    color: $darkgray;
+}
+
+nav {
+    ul {
+        li {
+            float: right;
+            display: inline-block;
+            margin-right: 20px;
+        }
+    }
+}
+
+label, input {
+    display: inline-block;
+    width: 40%;
+    text-align: left;
+}
+
+a, a:visited {
+    color: inherit;
+    text-decoration: none;
+}

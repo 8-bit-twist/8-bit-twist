@@ -1,0 +1,16 @@
+﻿.deactivated {
+    pointer-events: none;
+    cursor: default;
+    background-color: $lightgray;
+    color: $darkblue;
+}
+
+.toggle {
+    float: right;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#tagline {
+    font-style: italic;
+}

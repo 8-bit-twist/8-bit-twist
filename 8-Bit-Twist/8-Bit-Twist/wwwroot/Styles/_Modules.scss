@@ -1,0 +1,57 @@
+﻿@media screen and (max-height: 540px) {
+    body {
+        line-height: 12.15px;
+        font-size: 9.45px;
+    }
+    
+    header {
+        line-height: 27px;
+    }
+
+    main {
+        height: calc(100vh - 32px);
+    }
+
+    h1 {
+        font-size: 13.5px;
+    }
+
+    h2, h3 {
+        font-size: 12.15px;
+    }
+
+    h2, section {
+        margin: 6.75px auto 6.75px auto;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    nav {
+        width: 100%;
+        display: none;
+
+        ul {
+            background-color: $darkblue;
+            color: $lightgray;
+            width: 100%;
+
+            li {
+                width: 100%;
+                float: none;
+                clear: both; 
+                display: block;
+                a {
+                    display: block;
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 961px) {
+    .toggle {
+        display: none;
+    }
+}
