@@ -5,17 +5,19 @@
 
 <h2>Login</h2>
 
-<form method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <button type="submit">Login</button>
-</form>
+<section>
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div>
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Password"></label>
+            <input asp-for="Password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</section>

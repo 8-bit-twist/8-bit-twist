@@ -1,0 +1,14 @@
+﻿$lightblue: #B5B6E4;
+$lightgray: #CEC9CC;
+$medgray: #908A99;
+$darkblue: #4F43AE;
+$darkgray: #211A21;
+$play: Play, sans-serif;
+$press-start: 'Press Start 2P', cursive;
+
+@import "_Reset.scss";
+@import "_Base.scss";
+@import "_Layout.scss";
+@import "_Modules.scss";
+@import url('https://use.fontawesome.com/releases/v5.8.1/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Play|Press+Start+2P');

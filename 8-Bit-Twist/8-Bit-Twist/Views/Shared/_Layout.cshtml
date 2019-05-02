@@ -9,13 +9,13 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/Styles/Style.css" />
+    <link rel="stylesheet" href="~/Styles/Style.min.css" />
 
     <!--Imports-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
-    <header class="darkblue press-start">
+    <header>
         <h1 class="@(action == "Index" && controller == "Home" ? "deactivated" : "")">
             <a asp-controller="Home" asp-action="Index">8-Bit Twist</a>
         </h1>
@@ -32,26 +32,26 @@
             <ul>
                 @if (!SignInManager.IsSignedIn(User))
                 {
-                    <li class="@(action == "Login" && controller == "Users" ? "lightgray deactivated" : "")">
+                    <li class="@(action == "Login" && controller == "Users" ? "deactivated" : "")">
                         <a asp-controller="Users" asp-action="Login">Login</a>
                     </li>
-                    <li class="@(action == "Register" && controller == "Users" ? "lightgray deactivated": "")">
+                    <li class="@(action == "Register" && controller == "Users" ? "deactivated": "")">
                         <a asp-controller="Users" asp-action="Register">Register</a>
                     </li>
                 }
                 else if (User.Claims.First(c => c.Type == "Computer").Value == "True")
                 {
-                    <li class="@(action == "Computer" && controller == "Home" ? "lightgray deactivated" : "")">
+                    <li class="@(action == "Computer" && controller == "Home" ? "deactivated" : "")">
                         <a asp-controller="Home" asp-action="Computer">11010001</a>
                     </li>
                 }
-                <li class="@(action == "Index" && controller == "Shop" ? "lightgray deactivated" : "")">
+                <li class="@(action == "Index" && controller == "Shop" ? "deactivated" : "")">
                     <a asp-controller="Shop" asp-action="Index">Browse</a>
                 </li>
             </ul>
         </nav>
     </header>
-    <main class="lightblue play">
+    <main>
         @RenderBody()
     </main>
 
