@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace _8_Bit_Twist.Models
 {
-    public class BasketItems
+    public class BasketItem
     {
         [Required]
         public int ProductID { get; set; }
 
         [Required]
-        public int ApplicationUserID { get; set; }
+        public int BasketID { get; set; }
 
         [Required]
         public int Quantity { get; set; }
