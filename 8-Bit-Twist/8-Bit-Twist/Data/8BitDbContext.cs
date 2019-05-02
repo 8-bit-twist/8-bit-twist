@@ -16,6 +16,9 @@ namespace _8_Bit_Twist.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Setup composite keys
+            modelBuilder.Entity<BasketItem>().HasKey(ce => new { ce.BasketID, ce.ProductID });
+
             // Seed DB with initial 10 products
             // All product descriptions taken from Wikipedia
             modelBuilder.Entity<Product>().HasData(
@@ -132,5 +135,7 @@ namespace _8_Bit_Twist.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
     }
 }

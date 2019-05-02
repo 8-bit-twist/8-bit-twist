@@ -35,7 +35,7 @@ namespace _8_Bit_Twist.Models
         public string ReleaseDate { get; set; }
 
         // Nav props
-        public ICollection<BasketItems> BasketItems { get; set; }
+        public ICollection<BasketItem> BasketItems { get; set; }
     }
 
     public enum Generations
