@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _8_Bit_Twist.Data;
 
 namespace _8_Bit_Twist.Migrations
 {
     [DbContext(typeof(_8BitDbContext))]
-    partial class _8BitDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190502184956_AddBaskets")]
+    partial class AddBaskets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
