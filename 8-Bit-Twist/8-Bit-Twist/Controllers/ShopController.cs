@@ -22,7 +22,7 @@ namespace _8_Bit_Twist.Controllers
         }
 
         /// <summary>
-        /// Displays the shop index view with a list of all products.
+        /// Displays the shop index view with a list of all Products.
         /// </summary>
         /// <returns>A ViewResult</returns>
         [HttpGet]
@@ -30,6 +30,18 @@ namespace _8_Bit_Twist.Controllers
         {
             List<Product> products = await _invManager.GetAllProducts();
             return View(products);
+        }
+
+        /// <summary>
+        /// Displays a single Product's details page.
+        /// </summary>
+        /// <param name="id">The Products's ID</param>
+        /// <returns>A ViewResult</returns>
+        [HttpGet]
+        public async Task<IActionResult> View(int id)
+        {
+            Product product = await _invManager.GetProductByID(id);
+            return View(product);
         }
     }
 }
