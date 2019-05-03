@@ -11,6 +11,25 @@
     margin-right: 10px;
 }
 
+.product {
+    text-align: left;
+    img {
+        display: inline-block;
+        float: left;
+        width: 25vw;
+        height: 25vw;
+        max-width: 240px;
+        max-height: 240px;
+        overflow: hidden;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+
+    a {
+        color: $darkblue;
+    }
+}
+
 #tagline {
     font-style: italic;
 }

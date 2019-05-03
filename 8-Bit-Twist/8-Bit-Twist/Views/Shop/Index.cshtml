@@ -3,13 +3,14 @@
 @{
     ViewData["Title"] = "Browse Consoles";
 }
-<h2 class="press-start">Browse Products</h2>
+<h2>Browse Products</h2>
 @foreach (Product product in Model)
 {
     <section class="product medgray">
         <img src="@product.ImgUrl" />
-        <h4 class="press-start">@product.Name</h4>
+        <h4>@product.Name</h4>
         <h5>$@product.Price</h5>
         <p>@product.Description</p>
+        <a asp-action="View" asp-route-id="@product.ID">View Details</a>
     </section>
 }
