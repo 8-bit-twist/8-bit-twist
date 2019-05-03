@@ -8,6 +8,8 @@ namespace _8_Bit_Twist.Models
 {
     public class BasketItem
     {
+        public int ID { get; set; }
+
         [Required]
         public int ProductID { get; set; }
 
