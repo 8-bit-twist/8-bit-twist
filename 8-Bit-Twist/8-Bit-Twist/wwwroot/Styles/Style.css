@@ -94,12 +94,17 @@ h2 {
 h3 {
   font-size: 2.25vh; }
 
+h4 {
+  font-family: "Press Start 2P", cursive; }
+
 section {
+  position: relative;
   width: 90%;
   margin: auto;
   padding: 10px;
   margin-top: 1.25vh;
   border-radius: 10px;
+  min-height: 25vw;
   background-color: #CEC9CC;
   color: #211A21; }
 
@@ -127,6 +132,21 @@ a, a:visited {
   float: right;
   cursor: pointer;
   margin-right: 10px; }
+
+.product {
+  text-align: left; }
+  .product img {
+    display: inline-block;
+    float: left;
+    width: 25vw;
+    height: 25vw;
+    max-width: 240px;
+    max-height: 240px;
+    overflow: hidden;
+    object-fit: cover;
+    margin-right: 10px; }
+  .product a {
+    color: #4F43AE; }
 
 #tagline {
   font-style: italic; }
@@ -166,4 +186,6 @@ a, a:visited {
 
 @media screen and (min-width: 961px) {
   .toggle {
-    display: none; } }
+    display: none; }
+  section {
+    min-height: 240px; } }
