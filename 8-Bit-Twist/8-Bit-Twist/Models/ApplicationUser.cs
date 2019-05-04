@@ -13,6 +13,6 @@ namespace _8_Bit_Twist.Models
         public bool Computer { get; set; }
 
         // Nav props
-        public ICollection<Basket> Baskets { get; set; }
+        public Basket Basket { get; set; }
     }
 }
