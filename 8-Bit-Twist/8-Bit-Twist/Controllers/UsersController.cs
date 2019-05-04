@@ -24,6 +24,10 @@ namespace _8_Bit_Twist.Controllers
             _signInManager = signInManager;
         }
 
+        /// <summary>
+        /// Displays the registration form.
+        /// </summary>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
@@ -31,6 +35,11 @@ namespace _8_Bit_Twist.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Attempts to register the user using form information.
+        /// </summary>
+        /// <param name="model">The ViewModel containing the form information.</param>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel model)
@@ -68,6 +77,10 @@ namespace _8_Bit_Twist.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Displays the login form.
+        /// </summary>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -75,6 +88,11 @@ namespace _8_Bit_Twist.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Attempts to log in the user using form data.
+        /// </summary>
+        /// <param name="lvm">The ViewModel containing form data.</param>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel lvm)
@@ -92,6 +110,17 @@ namespace _8_Bit_Twist.Controllers
             }
 
             return View(lvm);
+        }
+
+        /// <summary>
+        /// Signs the current user out and redirects to the home view.
+        /// </summary>
+        /// <returns>A ViewResult</returns>
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
