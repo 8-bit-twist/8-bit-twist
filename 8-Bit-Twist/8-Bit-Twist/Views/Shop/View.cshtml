@@ -9,4 +9,17 @@
     <h4>Release Date: @Model.ReleaseDate (Generation @Model.Generation)</h4>
     <h5>$@Model.Price</h5>
     <p>@Model.Description</p>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        //TODO: Deactivate button if item is already in basket
+        <button id="addtobasket" onclick="addToBasket(@Model.ID)">Add To Basket</button>
+    }
+
 </section>
+
+<script>
+    function addToBasket(id) {
+        $('#addtobasket').toggleClass('deactivated').text('In Basket');
+        //TODO: AJAX request to add item to basket
+    }
+</script>
