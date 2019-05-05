@@ -11,8 +11,10 @@
     <p>@Model.Description</p>
     @if (SignInManager.IsSignedIn(User))
     {
-        //TODO: Deactivate button if item is already in basket
-        <button id="addtobasket" onclick="addToBasket(@Model.ID)">Add To Basket</button>
+        bool isInBasket = (bool)ViewData["IsInBasket"];
+
+        <button id="addtobasket" onclick="addToBasket(@Model.ID)" 
+            class="@(isInBasket ? "deactivated" : "")">@(isInBasket ? "In Basket" : "Add To Basket")</button>
     }
 
 </section>
@@ -21,5 +23,14 @@
     function addToBasket(id) {
         $('#addtobasket').toggleClass('deactivated').text('In Basket');
         //TODO: AJAX request to add item to basket
+       $.ajax({
+            type: 'POST',
+            url: '/shop/addtobasket',
+            datatype: 'json',
+            data: { productId: id },
+            error: function () {
+                alert('Something went wrong!');
+            }
+        });
     }
 </script>

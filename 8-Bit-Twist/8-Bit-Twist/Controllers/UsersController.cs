@@ -1,4 +1,5 @@
 ﻿using _8_Bit_Twist.Models;
+using _8_Bit_Twist.Models.Interfaces;
 using _8_Bit_Twist.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,12 +17,14 @@ namespace _8_Bit_Twist.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private readonly IBasketManager _bsktManager;
 
         public UsersController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, IBasketManager bsktManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _bsktManager = bsktManager;
         }
 
         /// <summary>
@@ -70,6 +73,11 @@ namespace _8_Bit_Twist.Controllers
                     // Sign user in
                     await _signInManager.SignInAsync(user, false);
 
+                    // Create a new basket
+                    Basket basket = await _bsktManager.CreateBasket(user.Id);
+                    user.BasketID = basket.ID;
+                    await _userManager.UpdateAsync(user);
+                    
                     // Redirect to home page
                     return RedirectToAction("Index", "Home");
                 }

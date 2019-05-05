@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace _8_Bit_Twist.Models
 {
     public class Product
     {
+        [Key]
         public int ID { get; set; }
 
         [Required]
@@ -33,9 +35,6 @@ namespace _8_Bit_Twist.Models
         [Required]
         [DataType(DataType.Date)]
         public string ReleaseDate { get; set; }
-
-        // Nav props
-        public ICollection<BasketItem> BasketItems { get; set; }
     }
 
     public enum Generations

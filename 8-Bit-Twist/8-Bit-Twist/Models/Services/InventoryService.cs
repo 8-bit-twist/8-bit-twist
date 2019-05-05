@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace _8_Bit_Twist.Models
+namespace _8_Bit_Twist.Models.Services
 {
     public class InventoryService : IInventoryManager
     {
