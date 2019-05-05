@@ -1,4 +1,5 @@
 ﻿using _8_Bit_Twist.Models;
+using _8_Bit_Twist.Models.Interfaces;
 using _8_Bit_Twist.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,14 +17,20 @@ namespace _8_Bit_Twist.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private readonly IBasketManager _bsktManager;
 
         public UsersController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, IBasketManager bsktManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _bsktManager = bsktManager;
         }
 
+        /// <summary>
+        /// Displays the registration form.
+        /// </summary>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
@@ -31,6 +38,11 @@ namespace _8_Bit_Twist.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Attempts to register the user using form information.
+        /// </summary>
+        /// <param name="model">The ViewModel containing the form information.</param>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Register(RegistrationViewModel model)
@@ -61,6 +73,11 @@ namespace _8_Bit_Twist.Controllers
                     // Sign user in
                     await _signInManager.SignInAsync(user, false);
 
+                    // Create a new basket
+                    Basket basket = await _bsktManager.CreateBasket(user.Id);
+                    user.BasketID = basket.ID;
+                    await _userManager.UpdateAsync(user);
+                    
                     // Redirect to home page
                     return RedirectToAction("Index", "Home");
                 }
@@ -68,6 +85,10 @@ namespace _8_Bit_Twist.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Displays the login form.
+        /// </summary>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -75,6 +96,11 @@ namespace _8_Bit_Twist.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Attempts to log in the user using form data.
+        /// </summary>
+        /// <param name="lvm">The ViewModel containing form data.</param>
+        /// <returns>A ViewResult</returns>
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel lvm)
@@ -92,6 +118,17 @@ namespace _8_Bit_Twist.Controllers
             }
 
             return View(lvm);
+        }
+
+        /// <summary>
+        /// Signs the current user out and redirects to the home view.
+        /// </summary>
+        /// <returns>A ViewResult</returns>
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

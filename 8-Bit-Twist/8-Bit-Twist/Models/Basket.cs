@@ -9,14 +9,18 @@ namespace _8_Bit_Twist.Models
 {
     public class Basket
     {
+        [Key]
         public int ID { get; set; }
 
         [Required]
         public string ApplicationUserID { get; set; }
 
-        // Nav props
-        [ForeignKey("ApplicationUserID")]
+        // Nav Properties
+        public List<BasketItem> BasketItems { get; set; }
+
+        [NotMapped]
+        [ForeignKey("ApplicationUserId")]
         public ApplicationUser User { get; set; }
-        public ICollection<BasketItem> BasketItems { get; set; }
+
     }
 }

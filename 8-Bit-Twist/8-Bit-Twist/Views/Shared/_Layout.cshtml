@@ -39,11 +39,17 @@
                         <a asp-controller="Users" asp-action="Register">Register</a>
                     </li>
                 }
-                else if (User.Claims.First(c => c.Type == "Computer").Value == "True")
+                else
                 {
-                    <li class="@(action == "Computer" && controller == "Home" ? "deactivated" : "")">
-                        <a asp-controller="Home" asp-action="Computer">11010001</a>
+                    <li>
+                        <a asp-controller="Users" asp-action="Logout">Logout</a>
                     </li>
+                    if (User.Claims.First(c => c.Type == "Computer").Value == "True")
+                    {
+                        <li class="@(action == "Computer" && controller == "Home" ? "deactivated" : "")">
+                            <a asp-controller="Home" asp-action="Computer">11010001</a>
+                        </li>
+                    }
                 }
                 <li class="@(action == "Index" && controller == "Shop" ? "deactivated" : "")">
                     <a asp-controller="Shop" asp-action="Index">Browse</a>

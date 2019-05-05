@@ -6,6 +6,7 @@ using _8_Bit_Twist.Data;
 using _8_Bit_Twist.Models;
 using _8_Bit_Twist.Models.Handlers;
 using _8_Bit_Twist.Models.Interfaces;
+using _8_Bit_Twist.Models.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -71,6 +72,7 @@ namespace _8_Bit_Twist
 
             // Register Interfaces and Services
             services.AddScoped<IInventoryManager, InventoryService>();
+            services.AddScoped<IBasketManager, BasketService>();
 
             services.AddAuthorization(options =>
             {
