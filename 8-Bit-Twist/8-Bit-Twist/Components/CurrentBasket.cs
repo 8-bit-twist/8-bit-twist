@@ -17,11 +17,11 @@ namespace _8_Bit_Twist.Components
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string userId)
+        public async Task<IViewComponentResult> InvokeAsync(string userEmail)
         {
             var basket = await _context.Users.Include(x => x.Basket)
                                        .ThenInclude(x => x.BasketItems)
-                                       .Where(x => x.Id == userId)
+                                       .Where(x => x.Email == userEmail)
                                        .ToListAsync();
 
             return View(basket);
