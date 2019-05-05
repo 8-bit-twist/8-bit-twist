@@ -1,0 +1,21 @@
+﻿@model Basket
+@{
+    ViewData["Title"] = "Your Basket";
+}
+
+<h2>Your Basket</h2>
+@if (Model.BasketItems.Count < 1)
+{
+    <h3>Your basket is empty!</h3>
+}
+
+@foreach (BasketItem item in Model.BasketItems)
+{
+    <section class="product">
+        <img src="@item.Product.ImgUrl" />
+        <h4>@item.Product.Name</h4>
+        <h5>$@item.Product.Price</h5>
+        <p>@item.Product.Description</p>
+        <a asp-action="View" asp-route-id="@item.Product.ID">View Details</a>
+    </section>
+}

@@ -70,5 +70,13 @@ namespace _8_Bit_Twist.Controllers
             Basket basket = await _bsktManager.GetBasket(_userManager.GetUserId(User));
             await _bsktManager.AddBasketItem(productId, basket.ID);
         }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Basket()
+        {
+            Basket basket = await _bsktManager.GetBasket(_userManager.GetUserId(User));
+            return View(basket);
+        }
     }
 }
