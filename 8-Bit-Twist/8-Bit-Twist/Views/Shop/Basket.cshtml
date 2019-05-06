@@ -11,7 +11,7 @@
 
 @foreach (BasketItem item in Model.BasketItems)
 {
-    <section class="product">
+    <section id="@item.ProductID" class="product">
         <img src="@item.Product.ImgUrl" />
         <h4>@item.Product.Name</h4>
         <h5>$@item.Product.Price</h5>
@@ -32,6 +32,7 @@
                     }
                 }
             </select>
+            <button onclick="deleteItem(@Model.ID, @item.ProductID)" class="deleteItem">Remove From Basket</button>
         </div>
     </section>
 }
@@ -39,7 +40,7 @@
 <script>
     function updateQuantity(basketId, productId, quantity) {
         $.ajax({
-            type: 'POST',
+            type: 'PUT',
             url: '/shop/updatequantity',
             datatype: 'json',
             data: {
@@ -53,4 +54,19 @@
         });
     }
 
+    function deleteItem(basketId, productId) {
+        $(`#${productId}`).remove();
+        $.ajax({
+            type: 'DELETE',
+            url: '/shop/deleteitem',
+            datatype: 'json',
+            data: {
+                basketId: basketId,
+                productId: productId
+            },
+            error: function () {
+                alert('Something went wrong!');
+            }
+        });
+    }
 </script>
