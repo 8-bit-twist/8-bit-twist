@@ -91,11 +91,18 @@ namespace _8_Bit_Twist.Controllers
         /// <param name="quantity">The updated quantity.</param>
         /// <returns>Void</returns>
         [Authorize]
-        [HttpPost]
+        [HttpPut]
         public async Task UpdateQuantity(int basketId, int productId, int quantity)
         {
             BasketItem item = await _bsktManager.GetBasketItem(productId, basketId);
             await _bsktManager.UpdateBasketItem(item, quantity);
+        }
+
+        [Authorize]
+        [HttpDelete]
+        public async Task DeleteItem(int basketId, int productId)
+        {
+            await _bsktManager.RemoveBasketItem(productId, basketId);
         }
     }
 }
