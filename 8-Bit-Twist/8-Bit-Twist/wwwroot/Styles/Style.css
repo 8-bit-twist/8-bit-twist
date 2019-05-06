@@ -151,6 +151,10 @@ a, a:visited {
 #tagline {
   font-style: italic; }
 
+#greeting {
+  float: left;
+  margin-left: 10px; }
+
 @media screen and (max-height: 540px) {
   body {
     line-height: 12.15px;
