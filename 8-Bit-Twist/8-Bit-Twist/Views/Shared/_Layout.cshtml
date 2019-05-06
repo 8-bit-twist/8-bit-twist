@@ -44,6 +44,9 @@
                     <li>
                         <a asp-controller="Users" asp-action="Logout">Logout</a>
                     </li>
+                    <li class="@(action == "Basket" && controller == "Shop" ? "deactivated" : "")">
+                        <a asp-controller="Shop" asp-action="Basket">Basket</a>
+                    </li>
                     if (User.Claims.First(c => c.Type == "Computer").Value == "True")
                     {
                         <li class="@(action == "Computer" && controller == "Home" ? "deactivated" : "")">

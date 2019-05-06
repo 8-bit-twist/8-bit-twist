@@ -70,5 +70,32 @@ namespace _8_Bit_Twist.Controllers
             Basket basket = await _bsktManager.GetBasket(_userManager.GetUserId(User));
             await _bsktManager.AddBasketItem(productId, basket.ID);
         }
+
+        /// <summary>
+        /// Displays the Basket page.
+        /// </summary>
+        /// <returns>A ViewResult</returns>
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> Basket()
+        {
+            Basket basket = await _bsktManager.GetBasket(_userManager.GetUserId(User));
+            return View(basket);
+        }
+
+        /// <summary>
+        /// Updates the quantity of a BasketItem.
+        /// </summary>
+        /// <param name="basketId">The Basket's ID.</param>
+        /// <param name="productId">The Product'S ID.</param>
+        /// <param name="quantity">The updated quantity.</param>
+        /// <returns>Void</returns>
+        [Authorize]
+        [HttpPost]
+        public async Task UpdateQuantity(int basketId, int productId, int quantity)
+        {
+            BasketItem item = await _bsktManager.GetBasketItem(productId, basketId);
+            await _bsktManager.UpdateBasketItem(item, quantity);
+        }
     }
 }

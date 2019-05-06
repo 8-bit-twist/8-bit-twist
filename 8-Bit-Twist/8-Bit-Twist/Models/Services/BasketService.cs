@@ -74,18 +74,20 @@ namespace _8_Bit_Twist.Models.Services
         public async Task<Basket> GetBasket(string userId)
         {
             return await _context.Baskets.Where(b => b.ApplicationUserID == userId)
-                .Include("BasketItems")
+                .Include("BasketItems.Product")
                 .FirstOrDefaultAsync();
         }
 
         /// <summary>
-        /// Gets a BasketItem by Id.
+        /// Gets a BasketItem.
         /// </summary>
-        /// <param name="basketItemId">The BasketItem's Id.</param>
+        /// <param name="productId">The product's ID.</param>
+        /// <param name="basketId">The basket's ID.</param>
         /// <returns>A BasketItem.</returns>
-        public async Task<BasketItem> GetBasketItem(int basketItemId)
+        public async Task<BasketItem> GetBasketItem(int productId, int basketId)
         {
-            return await _context.BasketItems.FindAsync(basketItemId);
+            return await _context.BasketItems.Where(i => i.ProductID == productId && i.BasketID == basketId)
+                .FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -101,11 +103,12 @@ namespace _8_Bit_Twist.Models.Services
         /// <summary>
         /// Removes a BasketItem.
         /// </summary>
-        /// <param name="basketItemId">The BasketItem's Id.</param>
+        /// <param name="productId">The product's ID.</param>
+        /// <param name="basketId">The basket's ID.</param>
         /// <returns>Void</returns>
-        public async Task RemoveBasketItem(int basketItemId)
+        public async Task RemoveBasketItem(int productId, int basketId)
         {
-            BasketItem item = await GetBasketItem(basketItemId);
+            BasketItem item = await GetBasketItem(productId, basketId);
             _context.BasketItems.Remove(item);
             await _context.SaveChangesAsync();
         }
@@ -113,12 +116,11 @@ namespace _8_Bit_Twist.Models.Services
         /// <summary>
         /// Updates a BasketItem's quantity.
         /// </summary>
-        /// <param name="basketItemId">The Id of the BasketItem.</param>
+        /// <param name="item">The BasketItem being updated.</param>
         /// <param name="quantity">The updated quantity.</param>
         /// <returns>Void</returns>
-        public async Task UpdateBasketItem(int basketItemId, int quantity)
+        public async Task UpdateBasketItem(BasketItem item, int quantity)
         {
-            BasketItem item = await GetBasketItem(basketItemId);
             item.Quantity = quantity;
             _context.BasketItems.Update(item);
             await _context.SaveChangesAsync();

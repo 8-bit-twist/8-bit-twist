@@ -104,7 +104,7 @@ section {
   padding: 10px;
   margin-top: 1.25vh;
   border-radius: 10px;
-  min-height: 25vw;
+  max-width: 960px;
   background-color: #CEC9CC;
   color: #211A21; }
 
@@ -134,12 +134,13 @@ a, a:visited {
   margin-right: 10px; }
 
 .product {
+  min-height: 25vh;
   text-align: left; }
   .product img {
     display: inline-block;
     float: left;
-    width: 25vw;
-    height: 25vw;
+    width: 25vh;
+    height: 25vh;
     max-width: 240px;
     max-height: 240px;
     overflow: hidden;
@@ -160,7 +161,8 @@ a, a:visited {
     line-height: 12.15px;
     font-size: 9.45px; }
   header {
-    line-height: 27px; }
+    line-height: 27px;
+    font-size: 9.45px; }
   main {
     height: calc(100vh - 32px); }
   h1 {
@@ -168,7 +170,12 @@ a, a:visited {
   h2, h3 {
     font-size: 12.15px; }
   h2, section {
-    margin: 6.75px auto 6.75px auto; } }
+    margin: 6.75px auto 6.75px auto; }
+  .product {
+    height: 135px; }
+    .product img {
+      height: 135px;
+      width: 135px; } }
 
 @media screen and (max-width: 960px) {
   nav {
@@ -190,6 +197,4 @@ a, a:visited {
 
 @media screen and (min-width: 961px) {
   .toggle {
-    display: none; }
-  section {
-    min-height: 240px; } }
+    display: none; } }

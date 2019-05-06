@@ -12,12 +12,14 @@
 }
 
 .product {
+    min-height: 25vh;
     text-align: left;
+
     img {
         display: inline-block;
         float: left;
-        width: 25vw;
-        height: 25vw;
+        width: 25vh;
+        height: 25vh;
         max-width: 240px;
         max-height: 240px;
         overflow: hidden;
