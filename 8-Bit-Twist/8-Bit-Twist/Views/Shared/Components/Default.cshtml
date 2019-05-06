@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_8_Bit_Twist.Models.BasketItem>
+﻿@model IEnumerable<_8_Bit_Twist.Models.ViewModels.CurrentBasket>
 @{
     Layout = null;
 }
@@ -15,8 +15,8 @@
         @foreach (var item in Model)
         {
             <article>
-                <h3>@item.Product.Name</h3>
-                <p>Quantity: @item.Quantity</p>
+                <h3>@item.Products.Name</h3>
+                <p>Quantity: @item.BasketItems.Quantity</p>
             </article>
         }
     </section>

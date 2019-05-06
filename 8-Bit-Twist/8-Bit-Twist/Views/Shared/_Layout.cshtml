@@ -59,11 +59,6 @@
     </header>
     <main>
         @RenderBody()
-        @if (SignInManager.IsSignedIn(User))
-        {
-
-            @await Component.InvokeAsync("CurrentBasket", User.Claims.First(c => c.Type == ClaimTypes.Email).Value);
-        }
     </main>
 
     <script>

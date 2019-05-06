@@ -14,3 +14,9 @@
         <a asp-action="View" asp-route-id="@product.ID">View Details</a>
     </section>
 }
+<section>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("CurrentBasket");
+    }
+</section>

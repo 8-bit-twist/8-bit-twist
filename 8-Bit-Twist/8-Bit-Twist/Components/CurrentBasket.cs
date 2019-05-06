@@ -1,4 +1,6 @@
 ﻿using _8_Bit_Twist.Data;
+using _8_Bit_Twist.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,19 +12,24 @@ namespace _8_Bit_Twist.Components
 {
     public class CurrentBasket : ViewComponent
     {
-        private readonly ApplicationDbContext _context;
+        private readonly _8BitDbContext _context;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CurrentBasket(ApplicationDbContext context)
+        public CurrentBasket(_8BitDbContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string userEmail)
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var basket = await _context.Users.Include(x => x.Basket)
-                                       .ThenInclude(x => x.BasketItems)
-                                       .Where(x => x.Email == userEmail)
-                                       .ToListAsync();
+            var user = await _userManager.FindByEmailAsync(User.Identity.Name);
+
+            var basket = await _context.Baskets.Where(x => x.ApplicationUserID == user.Id)
+                                               .Include(b => b.BasketItems)
+                                               .ThenInclude(p => p.Product).FirstOrDefaultAsync();
 
             return View(basket);
         }

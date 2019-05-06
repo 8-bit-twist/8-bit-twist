@@ -1,5 +1,5 @@
 ﻿@model Product
-@{ 
+@{
     ViewData["Title"] = "Product Details";
 }
 
@@ -13,17 +13,25 @@
     {
         bool isInBasket = (bool)ViewData["IsInBasket"];
 
-        <button id="addtobasket" onclick="addToBasket(@Model.ID)" 
-            class="@(isInBasket ? "deactivated" : "")">@(isInBasket ? "In Basket" : "Add To Basket")</button>
-    }
+        <button id="addtobasket" onclick="addToBasket(@Model.ID)"
+                class="@(isInBasket ? "deactivated" : "")">
+            @(isInBasket ? "In Basket" : "Add To Basket")
+            </button>
+        }
 
+</section>
+<section>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("CurrentBasket");
+    }
 </section>
 
 <script>
     function addToBasket(id) {
         $('#addtobasket').toggleClass('deactivated').text('In Basket');
         //TODO: AJAX request to add item to basket
-       $.ajax({
+        $.ajax({
             type: 'POST',
             url: '/shop/addtobasket',
             datatype: 'json',
