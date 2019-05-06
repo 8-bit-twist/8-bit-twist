@@ -6,6 +6,7 @@
     
     header {
         line-height: 27px;
+        font-size: 9.45px;
     }
 
     main {
@@ -22,6 +23,14 @@
 
     h2, section {
         margin: 6.75px auto 6.75px auto;
+    }
+
+    .product {
+        height: 135px;
+        img {
+            height: 135px;
+            width: 135px;
+        }
     }
 }
 

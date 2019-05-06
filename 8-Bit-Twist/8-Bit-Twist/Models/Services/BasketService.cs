@@ -74,7 +74,7 @@ namespace _8_Bit_Twist.Models.Services
         public async Task<Basket> GetBasket(string userId)
         {
             return await _context.Baskets.Where(b => b.ApplicationUserID == userId)
-                .Include("BasketItems")
+                .Include("BasketItems.Product")
                 .FirstOrDefaultAsync();
         }
 
