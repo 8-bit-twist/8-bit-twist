@@ -9,12 +9,12 @@ namespace _8_Bit_Twist.Models.Interfaces
     {
         Task<Basket> GetBasket(string userId);
         Task<List<BasketItem>> GetBasketItems(int basketId);
-        Task<BasketItem> GetBasketItem(int basketItemId);
+        Task<BasketItem> GetBasketItem(int productId, int basketId);
         Task<Basket> CreateBasket(string userId);
         Task AddBasketItem(int productId, int basketId);
-        Task RemoveBasketItem(int basketItemId);
+        Task RemoveBasketItem(int productId, int basketId);
         Task ClearBasket(int basketId);
-        Task UpdateBasketItem(int basketItemId, int quantity);
+        Task UpdateBasketItem(BasketItem item, int quantity);
         bool BasketHasItem(Basket basket, int productId);
     }
 }

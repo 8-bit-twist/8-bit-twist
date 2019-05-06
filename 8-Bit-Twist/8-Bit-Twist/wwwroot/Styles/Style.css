@@ -197,6 +197,4 @@ a, a:visited {
 
 @media screen and (min-width: 961px) {
   .toggle {
-    display: none; }
-  section {
-    min-height: 240px; } }
+    display: none; } }
