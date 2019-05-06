@@ -19,7 +19,7 @@
         <a asp-action="View" asp-route-id="@item.Product.ID">View Details</a>
         <div class="basketinputs">
             Quantity:  
-            <select onchange="updateQuantity(@Model.ID, @item.ProductID, this.value)" class="quantityselect">
+            <select onchange="updateQuantity(@Model.ID, @item.ProductID, this.value)">
                 @for (int i = 1; i <= 5; i++)
                 {
                     if (i == item.Quantity)
@@ -32,10 +32,12 @@
                     }
                 }
             </select>
-            <button onclick="deleteItem(@Model.ID, @item.ProductID)" class="deleteItem">Remove From Basket</button>
+            <button onclick="deleteItem(@Model.ID, @item.ProductID)">Remove From Basket</button>
         </div>
     </section>
 }
+
+<button onclick="location.href = '/Checkout/Reciept'">Checkout</button>
 
 <script>
     function updateQuantity(basketId, productId, quantity) {
