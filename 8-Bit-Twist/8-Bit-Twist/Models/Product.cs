@@ -35,6 +35,9 @@ namespace _8_Bit_Twist.Models
         [Required]
         [DataType(DataType.Date)]
         public string ReleaseDate { get; set; }
+
+        // Nav Properties
+        public List<BasketItem> BasketItems { get; set; }
     }
 
     public enum Generations

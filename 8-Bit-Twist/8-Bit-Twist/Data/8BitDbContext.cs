@@ -39,7 +39,7 @@ namespace _8_Bit_Twist.Data
                     SKU = "GB-111111",
                     Name = "Nintendo GameBoy",
                     Price = 70.00m,
-                    Description = "The Game Boy[a][b] is an 8-bit handheld game console developed and manufactured by Nintendo.",
+                    Description = "The Game Boy is an 8-bit handheld game console developed and manufactured by Nintendo.",
                     ImgUrl = "/Assets/IMG/Consoles/250px-Game-Boy-FL.jpg",
                     Generation = Generations.One,
                     ReleaseDate = "1989-7-31",
