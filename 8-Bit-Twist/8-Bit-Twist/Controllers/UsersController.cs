@@ -62,6 +62,7 @@ namespace _8_Bit_Twist.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Add custom Claims based on user input
                     Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
                     Claim emailClaim = new Claim(ClaimTypes.Email, user.Email, ClaimValueTypes.Email);
                     Claim computerClaim = new Claim("Computer", user.Computer.ToString());
@@ -69,6 +70,14 @@ namespace _8_Bit_Twist.Controllers
                     List<Claim> claims = new List<Claim> { nameClaim, emailClaim, computerClaim };
 
                     await _userManager.AddClaimsAsync(user, claims);
+
+                    // Add Roles to specific users
+                    if (user.Email.ToLower().Contains("@codefellows.com") || user.Email.ToLower() == "ntibbals@outlook.com" || user.Email.ToLower() == "andrew.l.roska@gmail.com")
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    }
+
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
                     // Sign user in
                     await _signInManager.SignInAsync(user, false);
