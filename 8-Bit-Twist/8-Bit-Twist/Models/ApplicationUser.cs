@@ -20,4 +20,10 @@ namespace _8_Bit_Twist.Models
         public Basket Basket { get; set; }
 
     }
+
+    public static class ApplicationRoles
+    {
+        public const string Member = "Member";
+        public const string Admin = "Admin";
+    }
 }
