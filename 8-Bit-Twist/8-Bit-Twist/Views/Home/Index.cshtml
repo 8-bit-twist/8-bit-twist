@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     ViewData["Title"] = "8-Bit Twist";
 }
 
@@ -10,4 +10,10 @@
     </p>
 </section>
 
+<section>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("CurrentBasket");
+    }
+</section>
 

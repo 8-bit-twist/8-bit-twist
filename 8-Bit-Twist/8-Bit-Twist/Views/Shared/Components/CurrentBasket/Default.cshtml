@@ -1,0 +1,30 @@
+﻿@model Basket
+@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+@*<head>
+    <meta name="viewport" content="width=device-width" />
+</head>*@
+<body>
+    <h2>Your Basket:</h2>
+
+    @if (Model.BasketItems.Count < 1)
+    {
+        <h3>Your basket is empty!</h3>
+    }
+
+    <section class="basket">
+        @foreach (var item in Model.BasketItems)
+        {
+            <article>
+                <h3>@item.Product.Name</h3>
+                <p>Quantity: @item.Quantity</p>
+            </article>
+        }
+    </section>
+</body>
+</html>

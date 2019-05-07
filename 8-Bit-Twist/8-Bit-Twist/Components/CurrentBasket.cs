@@ -27,9 +27,9 @@ namespace _8_Bit_Twist.Components
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
 
-            var basket = await _context.Baskets.Where(x => x.ApplicationUserID == user.Id)
+            var basket =  _context.Baskets.Where(x => x.ApplicationUserID == user.Id)
                                                .Include(b => b.BasketItems)
-                                               .ThenInclude(p => p.Product).FirstOrDefaultAsync();
+                                               .ThenInclude(p => p.Product).FirstOrDefault();
 
             return View(basket);
         }
