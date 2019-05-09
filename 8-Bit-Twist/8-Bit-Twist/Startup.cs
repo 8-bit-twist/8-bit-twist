@@ -85,7 +85,6 @@ namespace _8_Bit_Twist
 
             services.AddTransient<IAuthorizationHandler, ComputerHandler>();
             services.AddScoped<IAuthorizationHandler, EmailHandler>();
-            services.AddScoped<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

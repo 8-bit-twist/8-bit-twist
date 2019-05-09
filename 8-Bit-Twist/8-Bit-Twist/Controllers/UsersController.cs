@@ -22,6 +22,7 @@ namespace _8_Bit_Twist.Controllers
         private readonly IBasketManager _bsktManager;
         private readonly IEmailSender _emailSender;
 
+        // Injecting context and managers
         public UsersController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager, IBasketManager bsktManager, IEmailSender emailSender)
         {
@@ -96,7 +97,7 @@ namespace _8_Bit_Twist.Controllers
                     // Sign user in
                     await _signInManager.SignInAsync(user, false);
 
-                    // Create a new basket
+                    // Create a new basket for the user
                     Basket basket = await _bsktManager.CreateBasket(user.Id);
                     user.BasketID = basket.ID;
                     await _userManager.UpdateAsync(user);

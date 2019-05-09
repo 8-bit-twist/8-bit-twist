@@ -9,8 +9,8 @@ using _8_Bit_Twist.Data;
 namespace _8_Bit_Twist.Migrations
 {
     [DbContext(typeof(_8BitDbContext))]
-    [Migration("20190501201550_updatedproductimgurls")]
-    partial class updatedproductimgurls
+    [Migration("20190509021137_newDB")]
+    partial class newDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,68 @@ namespace _8_Bit_Twist.Migrations
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("_8_Bit_Twist.Models.Basket", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserID")
+                        .IsRequired();
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("_8_Bit_Twist.Models.BasketItem", b =>
+                {
+                    b.Property<int>("BasketID");
+
+                    b.Property<int>("ProductID");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("BasketID", "ProductID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("BasketItems");
+                });
+
+            modelBuilder.Entity("_8_Bit_Twist.Models.Order", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserID")
+                        .IsRequired();
+
+                    b.Property<decimal>("TotalPrice");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("_8_Bit_Twist.Models.OrderItem", b =>
+                {
+                    b.Property<int>("OrderID");
+
+                    b.Property<int>("ProductID");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("OrderID", "ProductID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderItems");
+                });
 
             modelBuilder.Entity("_8_Bit_Twist.Models.Product", b =>
                 {
@@ -64,7 +126,7 @@ namespace _8_Bit_Twist.Migrations
                         new
                         {
                             ID = 2,
-                            Description = "The Game Boy[a][b] is an 8-bit handheld game console developed and manufactured by Nintendo.",
+                            Description = "The Game Boy is an 8-bit handheld game console developed and manufactured by Nintendo.",
                             Generation = 0,
                             ImgUrl = "/Assets/IMG/Consoles/250px-Game-Boy-FL.jpg",
                             Name = "Nintendo GameBoy",
@@ -75,7 +137,7 @@ namespace _8_Bit_Twist.Migrations
                         new
                         {
                             ID = 3,
-                            Description = "The Sega Genesis, known as the Mega Drive[b] in regions outside of North America, is a 16-bit home video game console developed and sold by Sega.",
+                            Description = "The Sega Genesis, known as the Mega Drive in regions outside of North America, is a 16-bit home video game console developed and sold by Sega.",
                             Generation = 1,
                             ImgUrl = "/Assets/IMG/Consoles/rBVaSlq7QaiAEpR4AADkruC3mkg294.jpg",
                             Name = "Sega Genesis",
@@ -160,6 +222,32 @@ namespace _8_Bit_Twist.Migrations
                             ReleaseDate = "2001-11-6",
                             SKU = "GBA-111111"
                         });
+                });
+
+            modelBuilder.Entity("_8_Bit_Twist.Models.BasketItem", b =>
+                {
+                    b.HasOne("_8_Bit_Twist.Models.Basket", "Basket")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("BasketID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("_8_Bit_Twist.Models.Product", "Product")
+                        .WithMany("BasketItems")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("_8_Bit_Twist.Models.OrderItem", b =>
+                {
+                    b.HasOne("_8_Bit_Twist.Models.Order", "Order")
+                        .WithMany("OrderItems")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("_8_Bit_Twist.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

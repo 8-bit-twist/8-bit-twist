@@ -40,48 +40,16 @@ namespace _8_Bit_Twist.Controllers
         [Authorize]
         public async Task<IActionResult> Receipt()
         {
-            Order order = await CreateOrder();
-            await SendReceipt(order);
-
-            return View();
-        }
-
-        /// <summary>
-        /// Creates a new Order.
-        /// </summary>
-        /// <returns>Void</returns>
-        public async Task<Order> CreateOrder()
-        {
             string userId = _userManager.GetUserId(User);
             Basket basket = await _bsktManager.GetBasket(userId);
-            List<OrderItem> oItems = new List<OrderItem>();
-            decimal total = 0;
 
-            foreach(BasketItem bItem in basket.BasketItems)
-            {
-                oItems.Add(new OrderItem
-                {
-                    Quantity = bItem.Quantity,
-                    ProductID = bItem.ProductID,
-                    Price = bItem.Product.Price
-                });
-
-                total += bItem.Product.Price * bItem.Quantity;
-            }
-
-            Order order = await _ordManager.CreateOrder(userId, total);
-
-            foreach(OrderItem oItem in oItems)
-            {
-                oItem.OrderID = order.ID;
-                await _ordManager.AddOrderItem(oItem);
-            }
+            Order order = await _ordManager.CreateOrder(userId, basket);
 
             await _bsktManager.ClearBasket(basket.ID);
 
-            order.OrderItems = oItems;
+            await SendReceipt(order);
 
-            return order;
+            return View(order);
         }
 
         /// <summary>

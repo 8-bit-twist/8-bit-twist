@@ -18,6 +18,10 @@ namespace _8_Bit_Twist.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Displays a unique view for "computer" users.
+        /// </summary>
+        /// <returns>Rendered view.</returns>
         [Authorize(Policy = "ComputerPolicy")]
         public IActionResult Computer()
         {

@@ -16,6 +16,7 @@ namespace _8_Bit_Twist.Components
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
+        // Inject context and managers
         public CurrentBasket(_8BitDbContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -23,6 +24,10 @@ namespace _8_Bit_Twist.Components
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Gets the user's current basket.
+        /// </summary>
+        /// <returns>User's basket.</returns>
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
