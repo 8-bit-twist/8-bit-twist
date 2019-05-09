@@ -46,7 +46,7 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 ### Overall Project Schema
 
 #### Product Database Schema
-![Product Database Schema](/assets/img/8Bit-Twist_ProductDB.png)
+![Product Database Schema](https://dev.azure.com/8-Bit-Twist/c4f8abbc-14a1-47e4-8712-e54fc0b376e0/_apis/git/repositories/773301b0-d668-4df1-a1dc-4d970332a194/Items?path=%2F8-Bit-Twist%2F8-Bit-Twist%2Fwwwroot%2FAssets%2FIMG%2F8Bit-Twist+ProductDB.png)
 
 #### Model Properties and Requirements
 
@@ -64,7 +64,7 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 ---------------------------
 
 #### User Database Schema
-![User Database Schema](/assets/img/8Bit-Twist_UserDB.png)
+![User Database Schema](https://dev.azure.com/8-Bit-Twist/c4f8abbc-14a1-47e4-8712-e54fc0b376e0/_apis/git/repositories/773301b0-d668-4df1-a1dc-4d970332a194/Items?path=%2F8-Bit-Twist%2F8-Bit-Twist%2Fwwwroot%2FAssets%2FIMG%2F8Bit-Twist+UserDB.png)
 
 #### Model Properties and Requirements
 
