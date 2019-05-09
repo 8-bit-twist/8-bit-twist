@@ -37,6 +37,7 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 - MVC
 - xUnit
 - Azure
+- SendGrid
 
 ---------------------------------
 

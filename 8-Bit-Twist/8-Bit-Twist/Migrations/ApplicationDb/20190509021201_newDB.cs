@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _8_Bit_Twist.Migrations.ApplicationDb
 {
-    public partial class initial : Migration
+    public partial class newDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,7 +42,9 @@ namespace _8_Bit_Twist.Migrations.ApplicationDb
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true)
+                    LastName = table.Column<string>(nullable: true),
+                    Computer = table.Column<bool>(nullable: false),
+                    BasketID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

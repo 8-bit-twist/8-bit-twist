@@ -12,6 +12,7 @@ namespace _8_Bit_Twist.Models.Services
     {
         readonly _8BitDbContext _context;
 
+        // Inject context
         public BasketService(_8BitDbContext context)
         {
             _context = context;
@@ -36,6 +37,12 @@ namespace _8_Bit_Twist.Models.Services
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Check if Basket has Product.
+        /// </summary>
+        /// <param name="basket">Basket ID.</param>
+        /// <param name="productId">Product ID.</param>
+        /// <returns>True if Basket has Product.</returns>
         public bool BasketHasItem(Basket basket, int productId)
         {
             return basket.BasketItems.Where(i => i.ProductID == productId).FirstOrDefault() != null;

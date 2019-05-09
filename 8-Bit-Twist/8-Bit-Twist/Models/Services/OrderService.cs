@@ -22,28 +22,38 @@ namespace _8_Bit_Twist.Models.Services
         }
 
         /// <summary>
-        /// Adds an OrderItem to the database.
-        /// </summary>
-        /// <param name="item">The item being added.</param>
-        /// <returns>Void</returns>
-        public async Task AddOrderItem(OrderItem item)
-        {
-            await _context.OrderItems.AddAsync(item);
-            await _context.SaveChangesAsync();
-        }
-
-        /// <summary>
         /// Creates a new Order.
         /// </summary>
         /// <param name="userId">The user's Id.</param>
+        /// <param name="basket">The user's basket.</param>
         /// <returns>The new order.</returns>
-        public async Task<Order> CreateOrder(string userId, decimal total)
+        public async Task<Order> CreateOrder(string userId, Basket basket)
         {
+            decimal total = 0m;
+            List<OrderItem> oItems = new List<OrderItem>();
+
             Order order = new Order()
             {
                 ApplicationUserID = userId,
-                TotalPrice = total
             };
+
+            foreach (BasketItem bItem in basket.BasketItems)
+            {
+                OrderItem oItem = new OrderItem
+                {
+                    Quantity = bItem.Quantity,
+                    ProductID = bItem.ProductID,
+                    Price = bItem.Product.Price,
+                    OrderID = order.ID
+                };
+
+                oItems.Add(oItem);
+                total += bItem.Product.Price * bItem.Quantity;
+                await _context.OrderItems.AddAsync(oItem);
+            }
+
+            order.TotalPrice = total;
+            order.OrderItems = oItems;
 
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();

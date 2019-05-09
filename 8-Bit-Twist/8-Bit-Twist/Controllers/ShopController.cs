@@ -62,10 +62,9 @@ namespace _8_Bit_Twist.Controllers
         /// Adds a Product to the user's Basket.
         /// </summary>
         /// <param name="productId">The Product's Id.</param>
-        /// <returns>Void</returns>
         [Authorize]
         [HttpPost]
-        public async Task AddToBasket(int productId)
+        public async void AddToBasket(int productId)
         {
             Basket basket = await _bsktManager.GetBasket(_userManager.GetUserId(User));
             await _bsktManager.AddBasketItem(productId, basket.ID);
@@ -89,18 +88,22 @@ namespace _8_Bit_Twist.Controllers
         /// <param name="basketId">The Basket's ID.</param>
         /// <param name="productId">The Product'S ID.</param>
         /// <param name="quantity">The updated quantity.</param>
-        /// <returns>Void</returns>
         [Authorize]
         [HttpPut]
-        public async Task UpdateQuantity(int basketId, int productId, int quantity)
+        public async void UpdateQuantity(int basketId, int productId, int quantity)
         {
             BasketItem item = await _bsktManager.GetBasketItem(productId, basketId);
             await _bsktManager.UpdateBasketItem(item, quantity);
         }
 
+        /// <summary>
+        /// Deletes an item from a basket.
+        /// </summary>
+        /// <param name="basketId">The Basket's ID.</param>
+        /// <param name="productId">The Product's ID.</param>
         [Authorize]
         [HttpDelete]
-        public async Task DeleteItem(int basketId, int productId)
+        public async void DeleteItem(int basketId, int productId)
         {
             await _bsktManager.RemoveBasketItem(productId, basketId);
         }

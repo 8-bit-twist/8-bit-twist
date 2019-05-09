@@ -1,7 +1,18 @@
-﻿
+﻿@model Order
 @{
     ViewData["Title"] = "Receipt";
 }
 
-<h1>Receipt</h1>
+<h2>Thankyou for your purchase, @User.Claims.First(c => c.Type == "FullName").Value!</h2>
+<h4>Order Summary</h4><hr />
 
+@foreach (var item in Model.OrderItems)
+{
+    <img src="@item.Product.ImgUrl" alt="@item.Product.Name" />
+    <h4>@item.Product.Name</h4>
+    <p></p>
+    <h3>Unit Cost: @item.Price, Quantity: @item.Quantity, Total: $@(item.Price * item.Quantity)</h3>
+    <hr />
+};
+
+<h4>Order Total: $@Model.TotalPrice</h4>

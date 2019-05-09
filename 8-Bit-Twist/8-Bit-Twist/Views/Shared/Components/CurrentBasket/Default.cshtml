@@ -6,12 +6,12 @@
 <!DOCTYPE html>
 
 <html>
-@*<head>
-        <meta name="viewport" content="width=device-width" />
-    </head>*@
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
 <body>
     <h2>Your Basket:</h2>
-    @if (Model.BasketItems.Count > 1)
+    @if (Model.BasketItems.Count >= 1)
     {
         <section class="basket">
             @foreach (var item in Model.BasketItems)
