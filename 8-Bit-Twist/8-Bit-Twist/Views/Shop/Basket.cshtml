@@ -18,7 +18,7 @@
         <p>@item.Product.Description</p>
         <a asp-action="View" asp-route-id="@item.Product.ID">View Details</a>
         <div class="basketinputs">
-            Quantity:  
+            Quantity:
             <select onchange="updateQuantity(@Model.ID, @item.ProductID, this.value)">
                 @for (int i = 1; i <= 5; i++)
                 {
@@ -37,7 +37,11 @@
     </section>
 }
 
-<button onclick="location.href = '/Checkout/Reciept'">Checkout</button>
+@if (Model.BasketItems.Count > 0)
+{
+    <a asp-controller="Checkout" asp-action="Receipt">Checkout</a>
+}
+
 
 <script>
     function updateQuantity(basketId, productId, quantity) {

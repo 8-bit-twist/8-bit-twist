@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190508220331_addordermodels.cs" />
+    <Compile Remove="Migrations\20190508220331_addordermodels.Designer.cs" />
+    <Compile Remove="Migrations\ApplicationDb\20190508220527_addordermodels.cs" />
+    <Compile Remove="Migrations\ApplicationDb\20190508220527_addordermodels.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
 

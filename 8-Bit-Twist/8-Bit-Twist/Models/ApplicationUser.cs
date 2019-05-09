@@ -19,6 +19,8 @@ namespace _8_Bit_Twist.Models
         [ForeignKey("BasketID")]
         public Basket Basket { get; set; }
 
+        [NotMapped]
+        public List<Order> Orders { get; set; }
     }
 
     public static class ApplicationRoles
