@@ -7,22 +7,24 @@ using System.Threading.Tasks;
 
 namespace _8_Bit_Twist.Models
 {
-    public class BasketItem
+    public class OrderItem
     {
         [Required]
         public int ProductID { get; set; }
 
         [Required]
-        public int BasketID { get; set; }
+        public int OrderID { get; set; }
 
         [Required]
         public int Quantity { get; set; }
+
+        public decimal Price { get; set; }
 
         // Nav props
         [ForeignKey("ProductID")]
         public Product Product { get; set; }
 
-        [ForeignKey("BasketID")]
-        public Basket Basket { get; set; }
+        [ForeignKey("OrderID")]
+        public Order Order { get; set; }
     }
 }

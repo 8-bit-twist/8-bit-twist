@@ -18,6 +18,7 @@ namespace _8_Bit_Twist.Data
         {
             // Setup composite keys
             modelBuilder.Entity<BasketItem>().HasKey(ce => new { ce.BasketID, ce.ProductID });
+            modelBuilder.Entity<OrderItem>().HasKey(i => new { i.OrderID, i.ProductID});
 
             // Seed DB with initial 10 products
             // All product descriptions taken from Wikipedia
@@ -50,7 +51,7 @@ namespace _8_Bit_Twist.Data
                     SKU = "SG-111111",
                     Name = "Sega Genesis",
                     Price = 90.00m,
-                    Description = "The Sega Genesis, known as the Mega Drive[b] in regions outside of North America, is a 16-bit home video game console developed and sold by Sega.",
+                    Description = "The Sega Genesis, known as the Mega Drive in regions outside of North America, is a 16-bit home video game console developed and sold by Sega.",
                     ImgUrl = "/Assets/IMG/Consoles/rBVaSlq7QaiAEpR4AADkruC3mkg294.jpg",
                     Generation = Generations.Two,
                     ReleaseDate = "1989-8-14",
@@ -137,5 +138,7 @@ namespace _8_Bit_Twist.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<Basket> Baskets { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }
