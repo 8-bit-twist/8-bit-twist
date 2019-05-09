@@ -3,11 +3,13 @@ using _8_Bit_Twist.Models.Interfaces;
 using _8_Bit_Twist.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace _8_Bit_Twist.Controllers
@@ -18,13 +20,15 @@ namespace _8_Bit_Twist.Controllers
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
         private readonly IBasketManager _bsktManager;
+        private readonly IEmailSender _emailSender;
 
         public UsersController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager, IBasketManager bsktManager)
+            SignInManager<ApplicationUser> signInManager, IBasketManager bsktManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _bsktManager = bsktManager;
+            _emailSender = emailSender;
         }
 
         /// <summary>
@@ -79,6 +83,16 @@ namespace _8_Bit_Twist.Controllers
 
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
+                    // Send user a confirmation email
+                    string subject = "Welcome to 8-Bit Twist!";
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.AppendLine("<h1>Welcome to 8-Bit Twist!</h1>");
+                    sb.AppendLine($"<p>Dear {user.FirstName}</p>");
+                    sb.AppendLine($"<p>Thank you for joining <a href=\"https://8-bit-twist.azurewebsites.net/\">8-Bit Twist</a>!</p>");
+
+                    await _emailSender.SendEmailAsync(user.Email, subject, sb.ToString());
+
                     // Sign user in
                     await _signInManager.SignInAsync(user, false);
 
@@ -86,7 +100,7 @@ namespace _8_Bit_Twist.Controllers
                     Basket basket = await _bsktManager.CreateBasket(user.Id);
                     user.BasketID = basket.ID;
                     await _userManager.UpdateAsync(user);
-                    
+
                     // Redirect to home page
                     return RedirectToAction("Index", "Home");
                 }
