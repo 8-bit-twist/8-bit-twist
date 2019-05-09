@@ -64,7 +64,7 @@ namespace _8_Bit_Twist.Controllers
         /// <param name="productId">The Product's Id.</param>
         [Authorize]
         [HttpPost]
-        public async void AddToBasket(int productId)
+        public async Task AddToBasket(int productId)
         {
             Basket basket = await _bsktManager.GetBasket(_userManager.GetUserId(User));
             await _bsktManager.AddBasketItem(productId, basket.ID);
@@ -90,7 +90,7 @@ namespace _8_Bit_Twist.Controllers
         /// <param name="quantity">The updated quantity.</param>
         [Authorize]
         [HttpPut]
-        public async void UpdateQuantity(int basketId, int productId, int quantity)
+        public async Task UpdateQuantity(int basketId, int productId, int quantity)
         {
             BasketItem item = await _bsktManager.GetBasketItem(productId, basketId);
             await _bsktManager.UpdateBasketItem(item, quantity);
@@ -103,7 +103,7 @@ namespace _8_Bit_Twist.Controllers
         /// <param name="productId">The Product's ID.</param>
         [Authorize]
         [HttpDelete]
-        public async void DeleteItem(int basketId, int productId)
+        public async Task DeleteItem(int basketId, int productId)
         {
             await _bsktManager.RemoveBasketItem(productId, basketId);
         }
