@@ -1,0 +1,38 @@
+﻿@model _8_Bit_Twist.Models.ViewModels.CurrentBasket
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Checkout</h2>
+
+@foreach (BasketItem item in Model.Basket.BasketItems)
+{
+    <section id="@item.ProductID" class="product">
+        <h4>@item.Product.Name</h4>
+        <h5>$@item.Product.Price</h5>
+    </section>
+}
+
+<h4>Order Total: $@Model.CurrentTotal</h4>
+
+<section>
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label asp-for="User.Address"></label>
+        <input asp-for="User.Address" />
+        <span asp-validation-for="User.Address" class="text-danger"></span>
+        <label asp-for="User.City"></label>
+        <input asp-for="User.City" />
+        <span asp-validation-for="User.City" class="text-danger"></span>
+        <label asp-for="User.Zip"></label>
+        <input asp-for="User.Zip" />
+        <span asp-validation-for="User.Zip" class="text-danger"></span>
+        <label asp-for="CreditCards.CCNumber"></label>
+        <select asp-for="CreditCards.CCNumber" asp-items="@Html.GetEnumSelectList<_8_Bit_Twist.Models.CCNumbers>()"></select>
+        <label asp-for="CreditCards.CVV"></label>
+        <input asp-for="CreditCards.CVV" />
+        <span asp-validation-for="CreditCards.CVV" class="text-danger"></span>
+    </form>
+</section>
+
+<a asp-controller="Checkout" asp-action="Receipt"><h3>Checkout</h3></a>
