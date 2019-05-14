@@ -17,7 +17,7 @@ namespace _8_Bit_Twist.Models
 
         [Required]
         [Display(Name = "Card Info")]
-        public string CardNumber { get; set; }
+        public CreditCard CardNumber { get; set; }
 
         [Required]
         [Display(Name = "Shipping Address")]

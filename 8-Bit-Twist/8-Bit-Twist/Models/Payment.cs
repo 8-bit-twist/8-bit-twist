@@ -37,7 +37,7 @@ namespace _8_Bit_Twist.Models
 
             creditCardType creditCard = new creditCardType
             {
-                cardNumber = order.CardNumber,
+                cardNumber = order.CardNumber.ToString(),
                 expirationDate = "1219"
             };
 
@@ -45,7 +45,7 @@ namespace _8_Bit_Twist.Models
             customerAddressType address = new customerAddressType
             {
                 firstName = user.FirstName,
-                lastName = user.FirstName,
+                lastName = user.LastName,
                 address = order.ShippingAddress,
                 city = order.City,
                 zip = order.Zip
