@@ -18,14 +18,14 @@ namespace _8_Bit_Twist.Models
         readonly UserManager<ApplicationUser> _userManager;
         readonly ILogger _logger;
 
-        public Payment(IConfiguration configuration, UserManager<ApplicationUser> userManager, ILogger<Payment> logger)
+        public Payment(IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
             _configuration = configuration;
             _userManager = userManager;
-            _logger = logger;
+            //_logger = logger;
         }
 
-        public async Task Run(Order order)
+        public async Task<string> Run(Order order)
         {
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType
@@ -37,7 +37,7 @@ namespace _8_Bit_Twist.Models
 
             creditCardType creditCard = new creditCardType
             {
-                cardNumber = order.CardNumber,
+                cardNumber = order.CardNumber.ToString(),
                 expirationDate = "1219"
             };
 
@@ -45,7 +45,7 @@ namespace _8_Bit_Twist.Models
             customerAddressType address = new customerAddressType
             {
                 firstName = user.FirstName,
-                lastName = user.FirstName,
+                lastName = user.LastName,
                 address = order.ShippingAddress,
                 city = order.City,
                 zip = order.Zip
@@ -100,6 +100,7 @@ namespace _8_Bit_Twist.Models
                         logText.AppendLine($"Description: {response.transactionResponse.messages[0].description}");
                         logText.AppendLine($"Auth Code: {response.transactionResponse.authCode}");
                         _logger.LogInformation(logText.ToString());
+                        return "OK";
                     }
                     else
                     {
@@ -110,6 +111,7 @@ namespace _8_Bit_Twist.Models
                             logText.AppendLine($"Error Message: {response.transactionResponse.errors[0].errorText}");
                             _logger.LogWarning(logText.ToString());
                         }
+                        return "NOT OK";
                     }
                 }
                 else
@@ -126,11 +128,13 @@ namespace _8_Bit_Twist.Models
                         logText.AppendLine($"Error Message: {response.messages.message[0].text}");
                     }
                     _logger.LogWarning(logText.ToString());
+                    return "NOT OK";
                 }
             }
             else
             {
                 _logger.LogWarning("Transaction request resulted in null response");
+                return "NOT OK";
             }
         }
     }

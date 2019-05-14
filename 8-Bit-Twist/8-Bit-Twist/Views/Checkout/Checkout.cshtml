@@ -1,11 +1,11 @@
-﻿@model _8_Bit_Twist.Models.ViewModels.CurrentBasket
+﻿@model Order
 @{
     ViewData["Title"] = "Checkout";
 }
 
 <h2>Checkout</h2>
 
-@foreach (BasketItem item in Model.Basket.BasketItems)
+@foreach (OrderItem item in Model.OrderItems)
 {
     <section id="@item.ProductID" class="product">
         <h4>@item.Product.Name</h4>
@@ -13,26 +13,23 @@
     </section>
 }
 
-<h4>Order Total: $@Model.CurrentTotal</h4>
+<h4>Order Total: $@Model.TotalPrice</h4>
 
 <section>
     <form method="post">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <label asp-for="User.Address"></label>
-        <input asp-for="User.Address" />
-        <span asp-validation-for="User.Address" class="text-danger"></span>
-        <label asp-for="User.City"></label>
-        <input asp-for="User.City" />
-        <span asp-validation-for="User.City" class="text-danger"></span>
-        <label asp-for="User.Zip"></label>
-        <input asp-for="User.Zip" />
-        <span asp-validation-for="User.Zip" class="text-danger"></span>
-        <label asp-for="CreditCards.CCNumber"></label>
-        <select asp-for="CreditCards.CCNumber" asp-items="@Html.GetEnumSelectList<_8_Bit_Twist.Models.CCNumbers>()"></select>
-        <label asp-for="CreditCards.CVV"></label>
-        <input asp-for="CreditCards.CVV" />
-        <span asp-validation-for="CreditCards.CVV" class="text-danger"></span>
+        <label asp-for="ShippingAddress"></label>
+        <input asp-for="ShippingAddress" />
+        <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+        <label asp-for="City"></label>
+        <input asp-for="City" />
+        <span asp-validation-for="City" class="text-danger"></span>
+        <label asp-for="Zip"></label>
+        <input asp-for="Zip" />
+        <span asp-validation-for="Zip" class="text-danger"></span>
+        <label asp-for="CardNumber"></label>
+        <select asp-for="CardNumber" asp-items="@Html.GetEnumSelectList<_8_Bit_Twist.Models.CCNumbers>()"></select>
+        <button type="submit"><h3>Checkout</h3></button>
     </form>
 </section>
 
-<a asp-controller="Checkout" asp-action="Receipt"><h3>Checkout</h3></a>

@@ -17,7 +17,7 @@ namespace _8_Bit_Twist.Models
 
         [Required]
         [Display(Name = "Card Info")]
-        public string CardNumber { get; set; }
+        public CCNumbers CardNumber { get; set; }
 
         [Required]
         [Display(Name = "Shipping Address")]
@@ -38,4 +38,12 @@ namespace _8_Bit_Twist.Models
         [ForeignKey("ApplicationUserId")]
         public ApplicationUser User { get; set; }
     }
+
+    public enum CCNumbers : long
+    {
+        Visa = 4007000000027,
+        Mastercard = 5424000000000015,
+        Discover = 6011000000000012
+    }
+
 }
