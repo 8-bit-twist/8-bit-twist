@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,6 +21,7 @@ namespace _8_Bit_Twist.Controllers
         readonly IBasketManager _bsktManager;
         readonly UserManager<ApplicationUser> _userManager;
         readonly IEmailSender _emailSender;
+        public IConfiguration Configuration { get; }
 
         /// <summary>
         /// Initializes the controller with the required services.
@@ -28,22 +30,48 @@ namespace _8_Bit_Twist.Controllers
         /// <param name="bsktManager">The basket service</param>
         /// <param name="userManager">The user manager</param>
         public CheckoutController(IOrderManager ordManager, IBasketManager bsktManager,
-            UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+            UserManager<ApplicationUser> userManager, IEmailSender emailSender, IConfiguration configuration)
         {
             _ordManager = ordManager;
             _bsktManager = bsktManager;
             _userManager = userManager;
             _emailSender = emailSender;
+            Configuration = configuration;
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Receipt()
+        public async Task<IActionResult> Checkout()
         {
             string userId = _userManager.GetUserId(User);
             Basket basket = await _bsktManager.GetBasket(userId);
 
             Order order = await _ordManager.CreateOrder(userId, basket);
+
+            return View(order);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Checkout(Order order)
+        {
+            Order updatedOrder = await _ordManager.UpdateOrder(order, order.ID);
+            Payment payment = new Payment(Configuration, _userManager);
+            string answer = await payment.Run(order);
+
+            if (answer == "OK")
+            {
+                return RedirectToAction("Receipt", order); 
+            }
+
+            return View(order);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Receipt(Order order)
+        {
+            Basket basket = await _bsktManager.GetBasket(order.ApplicationUserID);
 
             await _bsktManager.ClearBasket(basket.ID);
 

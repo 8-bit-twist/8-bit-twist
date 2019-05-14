@@ -144,12 +144,13 @@ namespace _8_Bit_Twist.Models.Services
         /// <param name="updated"></param>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public async Task UpdateOrder(Order updated, int orderId)
+        public async Task<Order> UpdateOrder(Order updated, int orderId)
         {
             Order order = await GetOrder(orderId);
             order.ApplicationUserID = updated.ApplicationUserID;
             _context.Orders.Update(order);
             await _context.SaveChangesAsync();
+            return order;
         }
 
         /// <summary>

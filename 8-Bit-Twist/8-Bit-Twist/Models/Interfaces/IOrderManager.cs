@@ -15,6 +15,6 @@ namespace _8_Bit_Twist.Models.Interfaces
         Task DeleteOrder(int orderId);
         Task DeleteOrderItem(int productId, int orderId);
         Task UpdateOrderItem(OrderItem updated, int productId, int orderId);
-        Task UpdateOrder(Order updated, int orderId);
+        Task<Order> UpdateOrder(Order updated, int orderId);
     }
 }

@@ -5,7 +5,7 @@
 
 <h2>Checkout</h2>
 
-@foreach (BasketItem item in Model.OrderItems)
+@foreach (OrderItem item in Model.OrderItems)
 {
     <section id="@item.ProductID" class="product">
         <h4>@item.Product.Name</h4>
