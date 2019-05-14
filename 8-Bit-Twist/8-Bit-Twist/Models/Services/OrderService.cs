@@ -1,5 +1,6 @@
 ﻿using _8_Bit_Twist.Data;
 using _8_Bit_Twist.Models.Interfaces;
+using _8_Bit_Twist.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,36 +28,44 @@ namespace _8_Bit_Twist.Models.Services
         /// <param name="userId">The user's Id.</param>
         /// <param name="basket">The user's basket.</param>
         /// <returns>The new order.</returns>
-        public async Task<Order> CreateOrder(string userId, Basket basket)
+        public async Task<Order> CreateOrder(Basket basket, CheckoutViewModel cvm)
         {
-            decimal total = 0m;
             List<OrderItem> oItems = new List<OrderItem>();
+
+            decimal total = 0;
+            foreach (BasketItem item in basket.BasketItems)
+            {
+                total += item.Quantity * item.Product.Price;
+            }
 
             Order order = new Order()
             {
-                ApplicationUserID = userId,
+                ApplicationUserID = basket.ApplicationUserID,
+                CardNumber = cvm.CardNumber,
+                City = cvm.City,
+                TotalPrice = total,
+                ShippingAddress = cvm.ShippingAddress,
+                Zip = cvm.Zip
             };
+
+            await _context.Orders.AddAsync(order);
+            await _context.SaveChangesAsync();
 
             foreach (BasketItem bItem in basket.BasketItems)
             {
-                OrderItem oItem = new OrderItem
+                oItems.Add(new OrderItem
                 {
                     Quantity = bItem.Quantity,
                     ProductID = bItem.ProductID,
                     Price = bItem.Product.Price,
                     OrderID = order.ID
-                };
-
-                oItems.Add(oItem);
-                total += bItem.Product.Price * bItem.Quantity;
-                await _context.OrderItems.AddAsync(oItem);
+                });
             }
 
-            order.TotalPrice = total;
-            order.OrderItems = oItems;
-
-            await _context.Orders.AddAsync(order);
+            await _context.OrderItems.AddRangeAsync(oItems);
             await _context.SaveChangesAsync();
+
+            order.OrderItems = oItems;
 
             return order;
         }
@@ -98,7 +107,6 @@ namespace _8_Bit_Twist.Models.Services
         {
             return await _context.Orders.Where(o => o.ID == orderId)
                 .Include("OrderItems.Product")
-                .Include("User")
                 .FirstOrDefaultAsync();
         }
 
