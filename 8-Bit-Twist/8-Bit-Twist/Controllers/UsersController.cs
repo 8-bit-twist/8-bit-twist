@@ -77,7 +77,7 @@ namespace _8_Bit_Twist.Controllers
                     await _userManager.AddClaimsAsync(user, claims);
 
                     // Add Roles to specific users
-                    if (user.Email.ToLower().Contains("@codefellows.com") || user.Email.ToLower() == "ntibbals@outlook.com" || user.Email.ToLower() == "andrew.l.roska@gmail.com")
+                    if (user.Email.ToLower().Contains("@codefellows.com") || user.Email.ToLower() == "ntibbals@outlook.com" || user.Email.ToLower() == "andrew.l.roska@gmail.com" || user.Email.ToLower() == "staylor.ben@gmail.com")
                     {
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                     }
@@ -101,6 +101,12 @@ namespace _8_Bit_Twist.Controllers
                     Basket basket = await _bsktManager.CreateBasket(user.Id);
                     user.BasketID = basket.ID;
                     await _userManager.UpdateAsync(user);
+                    
+                    // If user is Admin, redirect to Admin dashboard
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToPage("/Admin/Index");
+                    }
 
                     // Redirect to home page
                     return RedirectToAction("Index", "Home");
@@ -131,10 +137,18 @@ namespace _8_Bit_Twist.Controllers
         {
             if (ModelState.IsValid)
             {
+                ApplicationUser user = _userManager.GetUserAsync(User).Result;
                 var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, false, false);
 
                 if (result.Succeeded)
                 {
+                    // If user is Admin, redirect to Admin dashboard
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin)
+                    {
+                        return RedirectToPage("/Admin/Index");
+                    }
+
+                    // Redirect to home page
                     return RedirectToAction("Index", "Home");
                 }
 
