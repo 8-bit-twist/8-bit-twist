@@ -144,10 +144,12 @@ namespace _8_Bit_Twist.Models.Services
         /// <returns>A list of orders.</returns>
         public async Task<List<Order>> GetOrders(string userId, int num)
         {
-            return await _context.Orders.Where(o => o.ApplicationUserID == userId)
-                .TakeLast(num)
-                .Include("OrderItems.Product")
+            List<Order> orders = await _context.Orders.Where(o => o.ApplicationUserID == userId && o.Completed)
                 .ToListAsync();
+
+            if (orders.Count > num) orders = orders.TakeLast(num).ToList();
+
+            return orders;
         }
 
         /// <summary>
@@ -157,9 +159,12 @@ namespace _8_Bit_Twist.Models.Services
         /// <returns>A List of Orders.</returns>
         public async Task<List<Order>> GetOrders(int num)
         {
-            return await _context.Orders.TakeLast(num)
-                .Include("OrderItems.Product")
+            List<Order> orders = await _context.Orders.Where(o => o.Completed)
                 .ToListAsync();
+
+            if (orders.Count > num) orders = orders.TakeLast(num).ToList();
+
+            return orders;
         }
 
         /// <summary>

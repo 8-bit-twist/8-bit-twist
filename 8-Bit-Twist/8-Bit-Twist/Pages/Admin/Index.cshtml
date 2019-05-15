@@ -1,8 +1,63 @@
 ﻿@page
 @model _8_Bit_Twist.Pages.Admin.IndexModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Admin Dashboard";
+    List<string> ignoredProps = new List<string> { "User", "OrderItems", "Completed" };
+    List<string> props = typeof(Order).GetProperties()
+        .Where(p => !ignoredProps.Contains(p.Name.ToString()))
+        .Select(p => p.Name.ToString())
+        .ToList();
 }
 
-<h1>Index</h1>
+<h2>Admin Dashboard</h2>
 
+<h3>Last 10 Orders</h3>
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Card Number</th>
+                <th>Shipping Address</th>
+                <th>City</th>
+                <th>Zip</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Order order in Model.RecentOrders)
+            {
+            <tr>
+                @foreach (string prop in props)
+                {
+                    var value = typeof(Order).GetProperty(prop).GetValue(order);
+
+                    switch (prop)
+                    {
+                        case "CardNumber": string num = ((long)value).ToString();
+                            num = num.Substring(num.Length - 4);
+                            value = $"************{num}";
+                            break;
+                        case "TotalPrice":
+                            value = $"${value}";
+                            break;
+                        case "ApplicationUserID":
+                            value = UserManager.Users.Where(u => u.Id == (string)value)
+                                .FirstOrDefault().Email;
+                            break;
+                    }
+
+                    <td>
+                        @value
+                    </td>
+                }
+                <td>
+                    <a asp-page="/Admin/Order" asp-route-id="@order.ID">View Details</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>
