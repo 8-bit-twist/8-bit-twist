@@ -5,23 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using _8_Bit_Twist.Models;
 using _8_Bit_Twist.Models.Interfaces;
+using _8_Bit_Twist.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace _8_Bit_Twist.Controllers
 {
+    [Authorize]
     public class CheckoutController : Controller
     {
         readonly IOrderManager _ordManager;
         readonly IBasketManager _bsktManager;
         readonly UserManager<ApplicationUser> _userManager;
         readonly IEmailSender _emailSender;
-        public IConfiguration Configuration { get; }
+
+        readonly IConfiguration Configuration;
 
         /// <summary>
         /// Initializes the controller with the required services.
@@ -40,43 +44,46 @@ namespace _8_Bit_Twist.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Checkout()
         {
             string userId = _userManager.GetUserId(User);
             Basket basket = await _bsktManager.GetBasket(userId);
-
-            Order order = await _ordManager.CreateOrder(userId, basket);
-
-            return View(order);
+            CheckoutViewModel cvm = new CheckoutViewModel();
+            return View(cvm);
         }
 
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Checkout(Order order)
+        public IActionResult MakePayment(CheckoutViewModel cvm)
         {
-            Order updatedOrder = await _ordManager.UpdateOrder(order, order.ID);
-            Payment payment = new Payment(Configuration, _userManager);
-            string answer = await payment.Run(order);
+            Basket basket = _bsktManager.GetBasket(_userManager.GetUserId(User)).Result;
+            Order order = _ordManager.CreateOrder(basket, cvm).Result;
 
-            if (answer == "OK")
+            ApplicationUser user = _userManager.GetUserAsync(User).Result;
+            Payment payment = new Payment(Configuration, _userManager);
+            string answer = payment.Run(user, order);
+
+            if (answer.Split(' ')[0] == "Successfully")
             {
-                return RedirectToAction("Receipt", order); 
+                _bsktManager.ClearBasket(basket.ID);
+                return RedirectToAction("Receipt", new { orderId = order.ID });
             }
 
-            return View(order);
+            return RedirectToAction("Checkout", cvm);
         }
 
         [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> Receipt(Order order)
+        public async Task<IActionResult> Receipt(int orderId)
         {
-            Basket basket = await _bsktManager.GetBasket(order.ApplicationUserID);
+            Order order = await _ordManager.GetOrder(orderId);
+            if (order is null) return NotFound();
 
-            await _bsktManager.ClearBasket(basket.ID);
-
-            await SendReceipt(order);
-
+            if (!order.Completed)
+            {
+                await SendReceipt(order);
+                order.Completed = true;
+                await _ordManager.UpdateOrder(order, order.ID);
+            }
+            
             return View(order);
         }
 

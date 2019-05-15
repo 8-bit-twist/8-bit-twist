@@ -1,22 +1,14 @@
-﻿@model Order
+﻿@model _8_Bit_Twist.Models.ViewModels.CheckoutViewModel
 @{
     ViewData["Title"] = "Checkout";
 }
 
 <h2>Checkout</h2>
 
-@foreach (OrderItem item in Model.OrderItems)
-{
-    <section id="@item.ProductID" class="product">
-        <h4>@item.Product.Name</h4>
-        <h5>$@item.Product.Price</h5>
-    </section>
-}
-
-<h4>Order Total: $@Model.TotalPrice</h4>
+@await  Component.InvokeAsync("CurrentBasket")
 
 <section>
-    <form method="post">
+    <form method="post" asp-action="MakePayment">
         <div asp-validation-summary="All" class="text-danger"></div>
         <label asp-for="ShippingAddress"></label>
         <input asp-for="ShippingAddress" />
