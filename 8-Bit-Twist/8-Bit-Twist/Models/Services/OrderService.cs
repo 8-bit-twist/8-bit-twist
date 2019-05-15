@@ -146,6 +146,7 @@ namespace _8_Bit_Twist.Models.Services
         {
             return await _context.Orders.Where(o => o.ApplicationUserID == userId)
                 .TakeLast(num)
+                .Include("OrderItems.Product")
                 .ToListAsync();
         }
 
@@ -156,7 +157,9 @@ namespace _8_Bit_Twist.Models.Services
         /// <returns>A List of Orders.</returns>
         public async Task<List<Order>> GetOrders(int num)
         {
-            return await _context.Orders.TakeLast(num).ToListAsync();
+            return await _context.Orders.TakeLast(num)
+                .Include("OrderItems.Product")
+                .ToListAsync();
         }
 
         /// <summary>
