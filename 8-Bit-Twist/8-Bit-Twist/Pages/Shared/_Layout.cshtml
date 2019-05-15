@@ -1,0 +1,75 @@
+﻿@{
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
+    string action = ViewContext.RouteData.Values["action"].ToString();
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/Styles/Style.min.css" />
+
+    <!--Imports-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="@(action == "Index" && controller == "Home" ? "deactivated" : "")">
+            <a asp-controller="Home" asp-action="Index">8-Bit Twist</a>
+        </h1>
+        <div class="toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div id="greeting">
+                Hello, @User.Claims.First(c => c.Type == "FullName").Value!
+            </div>
+        }
+        <nav>
+            <ul>
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <li class="@(action == "Login" && controller == "Users" ? "deactivated" : "")">
+                        <a asp-controller="Users" asp-action="Login">Login</a>
+                    </li>
+                    <li class="@(action == "Register" && controller == "Users" ? "deactivated": "")">
+                        <a asp-controller="Users" asp-action="Register">Register</a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a asp-controller="Users" asp-action="Logout">Logout</a>
+                    </li>
+                    <li class="@(action == "Basket" && controller == "Shop" ? "deactivated" : "")">
+                        <a asp-controller="Shop" asp-action="Basket">Basket</a>
+                    </li>
+                    if (User.Claims.First(c => c.Type == "Computer").Value == "True")
+                    {
+                        <li class="@(action == "Computer" && controller == "Home" ? "deactivated" : "")">
+                            <a asp-controller="Home" asp-action="Computer">11010001</a>
+                        </li>
+                    }
+                }
+                <li class="@(action == "Index" && controller == "Shop" ? "deactivated" : "")">
+                    <a asp-controller="Shop" asp-action="Index">Browse</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+
+    <script>
+        $(document).ready(function () {
+            $(".fa-bars").click(function () {
+                $("nav").toggle();
+            });
+        });
+    </script>
+</body>
+</html>
