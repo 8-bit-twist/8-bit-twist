@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    string page = ViewContext.RouteData.Values["page"].ToString().Split('/')[0];
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -28,20 +32,25 @@
                 <li>
                     <a asp-controller="Users" asp-action="Logout">Logout</a>
                 </li>
+
+                <li class="deactivated">
+                    <a asp-page="/Profile/Index">Profile</a>
+                </li>
+
                 @if (User.IsInRole(ApplicationRoles.Admin))
                 {
-
-                }
-                else
-                {
-                    <li>
-                        <a asp-controller="Shop" asp-action="Basket">Basket</a>
+                    <li class="@(page == "Admin" ? "deactivated" : "")">
+                        <a asp-page="/Admin/Index">Admin</a>
                     </li>
-                    <li>
-                        <a asp-controller="Shop" asp-action="Index">Browse</a>
-                    </li>
-
                 }
+
+                <li>
+                    <a asp-controller="Shop" asp-action="Basket">Basket</a>
+                </li>
+
+                <li>
+                    <a asp-controller="Shop" asp-action="Index">Browse</a>
+                </li>
 
                 @if (User.Claims.First(c => c.Type == "Computer").Value == "True")
                 {

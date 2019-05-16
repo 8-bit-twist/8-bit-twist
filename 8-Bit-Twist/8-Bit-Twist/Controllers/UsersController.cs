@@ -123,7 +123,17 @@ namespace _8_Bit_Twist.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (User.IsInRole(ApplicationRoles.Admin))
+                {
+                    return RedirectToPage("/Admin/Index");
+                }
+
+                else return RedirectToAction("Index", "Home");
+            }
+
+            else return View();
         }
 
         /// <summary>
@@ -141,8 +151,7 @@ namespace _8_Bit_Twist.Controllers
 
                 if (result.Succeeded)
                 {
-                    // Redirect to home page
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
