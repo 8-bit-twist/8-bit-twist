@@ -1,0 +1,31 @@
+﻿@page
+@model _8_Bit_Twist.Pages.Profile.IndexModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>Profile</h2>
+
+<section>
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div>
+            <label asp-for="PVM.EmailAddress"></label>
+            <input asp-for="PVM.EmailAddress" readonly="readonly" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.FirstName"></label>
+            <input asp-for="PVM.FirstName" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.LastName"></label>
+            <input asp-for="PVM.LastName" />
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+</section>

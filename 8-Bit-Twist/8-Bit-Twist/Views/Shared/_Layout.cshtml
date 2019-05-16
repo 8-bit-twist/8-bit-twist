@@ -35,6 +35,7 @@
                     <li class="@(action == "Login" && controller == "Users" ? "deactivated" : "")">
                         <a asp-controller="Users" asp-action="Login">Login</a>
                     </li>
+
                     <li class="@(action == "Register" && controller == "Users" ? "deactivated": "")">
                         <a asp-controller="Users" asp-action="Register">Register</a>
                     </li>
@@ -44,16 +45,30 @@
                     <li>
                         <a asp-controller="Users" asp-action="Logout">Logout</a>
                     </li>
-                    <li class="@(action == "Basket" && controller == "Shop" ? "deactivated" : "")">
-                        <a asp-controller="Shop" asp-action="Basket">Basket</a>
+
+                    <li>
+                        <a asp-page="/Profile/Index">Profile</a>
                     </li>
-                    if (User.Claims.First(c => c.Type == "Computer").Value == "True")
+
+                    @if (User.IsInRole(ApplicationRoles.Admin))
+                    {
+                        <li>
+                            <a asp-page="/Admin/Index">Admin</a>
+                        </li>
+                    }
+
+                    @if (User.Claims.First(c => c.Type == "Computer").Value == "True")
                     {
                         <li class="@(action == "Computer" && controller == "Home" ? "deactivated" : "")">
                             <a asp-controller="Home" asp-action="Computer">11010001</a>
                         </li>
                     }
+
+                    <li class="@(action == "Basket" && controller == "Shop" ? "deactivated" : "")">
+                        <a asp-controller="Shop" asp-action="Basket">Basket</a>
+                    </li>
                 }
+
                 <li class="@(action == "Index" && controller == "Shop" ? "deactivated" : "")">
                     <a asp-controller="Shop" asp-action="Index">Browse</a>
                 </li>

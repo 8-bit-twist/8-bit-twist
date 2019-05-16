@@ -16,10 +16,6 @@ namespace _8_Bit_Twist.Controllers
         /// <returns>The rendered view.</returns>
         public IActionResult Index()
         {
-            if (User.IsInRole(ApplicationRoles.Admin))
-            {
-                return RedirectToPage("/Admin/Index");
-            }
             return View();
         }
 
