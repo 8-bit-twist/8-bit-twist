@@ -1,0 +1,29 @@
+﻿@page
+@model _8_Bit_Twist.Pages.Admin.ProductsModel
+@using _8_Bit_Twist.Models.Interfaces
+
+@inject IInventoryManager InventoryManager
+@{
+    List<Product> products = await InventoryManager.GetAllProducts();
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Products</title>
+</head>
+<body>
+    @foreach (var product in products)
+    {
+        <section class="product">
+            <img src="@product.ImgUrl" />
+            <h4>@product.Name</h4>
+            <h5>$@product.Price</h5>
+            <p>@product.Description</p>
+            <a asp-action="View" asp-route-id="@product.ID">View Details</a>
+        </section>
+    }
+
+</body>
+</html>
