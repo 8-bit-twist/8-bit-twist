@@ -19,13 +19,11 @@ namespace _8_Bit_Twist.Models
         public string Name { get; set; }
 
         [Required]
-        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Required]
         public string Description { get; set; }
 
-        [Required]
         [DataType(DataType.ImageUrl)]
         public string ImgUrl { get; set; }
 

@@ -11,6 +11,9 @@
 
 <h2>Admin Dashboard</h2>
 
+<a asp-page="/Admin/Products/Index">View Inventory</a>
+
+
 <h3>Last 10 Orders</h3>
 <section>
     <table>
@@ -29,34 +32,35 @@
         <tbody>
             @foreach (Order order in Model.RecentOrders)
             {
-            <tr>
-                @foreach (string prop in props)
-                {
-                    var value = typeof(Order).GetProperty(prop).GetValue(order);
-
-                    switch (prop)
+                <tr>
+                    @foreach (string prop in props)
                     {
-                        case "CardNumber": string num = ((long)value).ToString();
-                            num = num.Substring(num.Length - 4);
-                            value = $"************{num}";
-                            break;
-                        case "TotalPrice":
-                            value = $"${value}";
-                            break;
-                        case "ApplicationUserID":
-                            value = UserManager.Users.Where(u => u.Id == (string)value)
-                                .FirstOrDefault().Email;
-                            break;
-                    }
+                        var value = typeof(Order).GetProperty(prop).GetValue(order);
 
+                        switch (prop)
+                        {
+                            case "CardNumber":
+                                string num = ((long)value).ToString();
+                                num = num.Substring(num.Length - 4);
+                                value = $"************{num}";
+                                break;
+                            case "TotalPrice":
+                                value = $"${value}";
+                                break;
+                            case "ApplicationUserID":
+                                value = UserManager.Users.Where(u => u.Id == (string)value)
+                                    .FirstOrDefault().Email;
+                                break;
+                        }
+
+                        <td>
+                            @value
+                        </td>
+                    }
                     <td>
-                        @value
+                        <a asp-page="/Admin/Order" asp-route-id="@order.ID">View Details</a>
                     </td>
-                }
-                <td>
-                    <a asp-page="/Admin/Order" asp-route-id="@order.ID">View Details</a>
-                </td>
-            </tr>
+                </tr>
             }
         </tbody>
     </table>
