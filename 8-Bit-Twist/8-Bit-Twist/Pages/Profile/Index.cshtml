@@ -8,6 +8,7 @@
 
 <section>
     <form method="post">
+        <div>@Model.Message</div>
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <div>
@@ -25,6 +26,25 @@
             <input asp-for="PVM.LastName" />
         </div>
         
+        <hr />
+
+        <div>
+            <label asp-for="PVM.Password"></label>
+            <input asp-for="PVM.Password" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.NewPassword"></label>
+            <input asp-for="PVM.NewPassword" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.ConfirmPassword"></label>
+            <input asp-for="PVM.ConfirmPassword" />
+        </div>
+
+        <hr />
+
         <button type="submit">Submit</button>
     </form>
 
