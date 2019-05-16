@@ -137,17 +137,10 @@ namespace _8_Bit_Twist.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = _userManager.GetUserAsync(User).Result;
                 var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, false, false);
 
                 if (result.Succeeded)
                 {
-                    // If user is Admin, redirect to Admin dashboard
-                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin)
-                    {
-                        return RedirectToPage("/Admin/Index");
-                    }
-
                     // Redirect to home page
                     return RedirectToAction("Index", "Home");
                 }

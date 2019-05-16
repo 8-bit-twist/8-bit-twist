@@ -3,7 +3,7 @@
     ViewData["Title"] = "Receipt";
 }
 
-<h2>Thankyou for your purchase, @User.Claims.First(c => c.Type == "FullName").Value!</h2>
+<h2>Thank you for your purchase, @User.Claims.First(c => c.Type == "FullName").Value!</h2>
 <h4>Order Summary</h4><hr />
 
 @foreach (var item in Model.OrderItems)

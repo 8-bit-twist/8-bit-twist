@@ -9,7 +9,8 @@ namespace _8_Bit_Twist.Models.Interfaces
     public interface IOrderManager
     {
         Task<Order> GetOrder(int orderId);
-        Task<List<Order>> GetOrders(string userId);
+        Task<List<Order>> GetOrders(string userId, int num);
+        Task<List<Order>> GetOrders(int num);
         Task<List<OrderItem>> GetOrderItems(int orderId);
         Task<OrderItem> GetOrderItem(int productId, int orderId);
         Task<Order> CreateOrder(Basket basket, CheckoutViewModel cvm);
