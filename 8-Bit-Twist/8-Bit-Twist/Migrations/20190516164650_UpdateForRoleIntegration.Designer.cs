@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _8_Bit_Twist.Data;
 
 namespace _8_Bit_Twist.Migrations
 {
     [DbContext(typeof(_8BitDbContext))]
-    partial class _8BitDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190516164650_UpdateForRoleIntegration")]
+    partial class UpdateForRoleIntegration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +106,8 @@ namespace _8_Bit_Twist.Migrations
 
                     b.Property<int>("Generation");
 
-                    b.Property<string>("ImgUrl");
+                    b.Property<string>("ImgUrl")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -141,7 +144,7 @@ namespace _8_Bit_Twist.Migrations
                             ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/game-boy.png",
                             Name = "Nintendo GameBoy",
                             Price = 0.70m,
-                            ReleaseDate = "1989-07-31",
+                            ReleaseDate = "1989-7-31",
                             SKU = "GB-111111"
                         },
                         new
@@ -152,7 +155,7 @@ namespace _8_Bit_Twist.Migrations
                             ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/genesis.png",
                             Name = "Sega Genesis",
                             Price = 0.90m,
-                            ReleaseDate = "1989-08-14",
+                            ReleaseDate = "1989-8-14",
                             SKU = "SG-111111"
                         },
                         new
@@ -163,7 +166,7 @@ namespace _8_Bit_Twist.Migrations
                             ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/snes.png",
                             Name = "Super Nintendo Entertainment System",
                             Price = 1.75m,
-                            ReleaseDate = "1991-08-23",
+                            ReleaseDate = "1991-8-23",
                             SKU = "SNES-111111"
                         },
                         new
@@ -196,7 +199,7 @@ namespace _8_Bit_Twist.Migrations
                             ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/playstation.png",
                             Name = "Sony PlayStation One",
                             Price = 1.50m,
-                            ReleaseDate = "1995-09-09",
+                            ReleaseDate = "1995-9-9",
                             SKU = "PS-111111"
                         },
                         new
@@ -207,7 +210,7 @@ namespace _8_Bit_Twist.Migrations
                             ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/n64.png",
                             Name = "Nintendo 64",
                             Price = 1.75m,
-                            ReleaseDate = "1996-09-26",
+                            ReleaseDate = "1996-9-26",
                             SKU = "N64-111111"
                         },
                         new
@@ -218,7 +221,7 @@ namespace _8_Bit_Twist.Migrations
                             ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/saturn.png",
                             Name = "Sega Saturn",
                             Price = 2.00m,
-                            ReleaseDate = "1995-05-11",
+                            ReleaseDate = "1995-5-11",
                             SKU = "SS-111111"
                         },
                         new

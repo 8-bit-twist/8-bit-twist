@@ -10,6 +10,7 @@ namespace _8_Bit_Twist.Models.Interfaces
         // Get a single product by ID
         Task<Product> GetProductByID(int id);
 
+        Product GetProductByIDGreedy(int id);
         // Get a list of all products
         Task<List<Product>> GetAllProducts();
 
@@ -17,10 +18,10 @@ namespace _8_Bit_Twist.Models.Interfaces
         Task AddProduct(Product product);
 
         // Update info for a product
-        Task UpdateProduct(Product product);
+        Task UpdateProduct(int id, Product product);
 
         // Delete a product
-        Task DeleteProduct(Product product);
+        Task DeleteProduct(int id);
 
         // Check if a product exists by ID
         Task<bool> ProductExists(int id);

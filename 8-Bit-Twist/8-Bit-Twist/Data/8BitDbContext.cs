@@ -43,7 +43,7 @@ namespace _8_Bit_Twist.Data
                     Description = "The Game Boy is an 8-bit handheld game console developed and manufactured by Nintendo.",
                     ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/game-boy.png",
                     Generation = Generations.One,
-                    ReleaseDate = "1989-7-31",
+                    ReleaseDate = "1989-07-31",
                 },
                 new Product
                 {
@@ -54,7 +54,7 @@ namespace _8_Bit_Twist.Data
                     Description = "The Sega Genesis, known as the Mega Drive in regions outside of North America, is a 16-bit home video game console developed and sold by Sega.",
                     ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/genesis.png",
                     Generation = Generations.Two,
-                    ReleaseDate = "1989-8-14",
+                    ReleaseDate = "1989-08-14",
                 },
                 new Product
                 {
@@ -65,7 +65,7 @@ namespace _8_Bit_Twist.Data
                     Description = "The Super Nintendo Entertainment System (SNES), also known as the Super NES or Super Nintendo, is a 16-bit home video game console developed by Nintendo.",
                     ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/snes.png",
                     Generation = Generations.Two,
-                    ReleaseDate = "1991-8-23",
+                    ReleaseDate = "1991-08-23",
                 },
                 new Product
                 {
@@ -98,7 +98,7 @@ namespace _8_Bit_Twist.Data
                     Description = "The PlayStation (officially abbreviated to PS, and commonly known as the PS1 or its codename, PSX) is a home video game console developed and marketed by Sony Computer Entertainment.",
                     ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/playstation.png",
                     Generation = Generations.Three,
-                    ReleaseDate = "1995-9-9",
+                    ReleaseDate = "1995-09-09",
                 },
                 new Product
                 {
@@ -109,7 +109,7 @@ namespace _8_Bit_Twist.Data
                     Description = "The Nintendo 64 (N64), stylized as NINTENDO64, is a home video game console developed and marketed by Nintendo. ",
                     ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/n64.png",
                     Generation = Generations.Three,
-                    ReleaseDate = "1996-9-26",
+                    ReleaseDate = "1996-09-26",
                 },
                 new Product
                 {
@@ -120,7 +120,7 @@ namespace _8_Bit_Twist.Data
                     Description = "The Sega Saturn is a 32-bit home video game console developed by Sega.",
                     ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/saturn.png",
                     Generation = Generations.Three,
-                    ReleaseDate = "1995-5-11",
+                    ReleaseDate = "1995-05-11",
                 },
                 new Product
                 {
