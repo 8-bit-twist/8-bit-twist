@@ -46,36 +46,35 @@ namespace _8_Bit_Twist.Pages.Admin
         {
             Product existingProduct = await _invManager.GetProductByID(ID.GetValueOrDefault()) ?? new Product();
 
-            //if (Product.ImgUrl == null)
-            //{
-            //    Product.ImgUrl = existingProduct.ImgUrl;
-            //}
-            //else
-            //{
-            //    var filePath = Path.GetTempFileName();
+            if (Image != null)
+            {
+                var filePath = Path.GetTempFileName();
 
-            //    using (var stream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        await Image.CopyToAsync(stream);
-            //    }
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await Image.CopyToAsync(stream);
+                }
 
-            //    var container = await BlobImage.GetContainer("products");
+                var container = await BlobImage.GetContainer("products");
 
-            //    BlobImage.UploadFile(container, Image.FileName, filePath);
+                BlobImage.UploadFile(container, Image.FileName, filePath);
 
-            //    CloudBlob blob = await BlobImage.GetBlob(Image.FileName, container.Name);
+                CloudBlob blob = await BlobImage.GetBlob(Image.FileName, container.Name);
 
-            //    Product.ImgUrl = blob.Uri.ToString();
-            //}
+                Product.ImgUrl = blob.Uri.ToString();
 
-            //existingProduct = Product;
+                existingProduct.ImgUrl = Product.ImgUrl;
+            }
 
             existingProduct.Name = Product.Name;
             existingProduct.Price = Product.Price;
             existingProduct.ReleaseDate = Product.ReleaseDate;
+            existingProduct.SKU = Product.SKU;
+            existingProduct.Generation = Product.Generation;
+            existingProduct.Description = Product.Description;
 
             await _invManager.UpdateProduct(ID.GetValueOrDefault(), existingProduct);
-            return RedirectToPage("/Admin/Products/Manage");
+            return RedirectToPage("/Admin/Products/Index");
         }
 
         public async Task<IActionResult> OnPostDelete()

@@ -33,7 +33,7 @@
             <span asp-validation-for="Product.Price" class="text-danger"></span>
 
             <label asp-for="Product.ReleaseDate"></label>
-            <input asp-for="Product.ReleaseDate" />
+            <input asp-for="Product.ReleaseDate" value="@Model.Product.ReleaseDate" />
             <span asp-validation-for="Product.ReleaseDate" class="text-danger"></span>
 
             <label asp-for="Product.Generation"></label>
