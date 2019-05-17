@@ -79,6 +79,10 @@ namespace _8_Bit_Twist.Pages.Admin
 
         public async Task<IActionResult> OnPostDelete()
         {
+            if (!await _invManager.ProductExists(ID.GetValueOrDefault()))
+            {
+                return RedirectToPage("/Admin/Products/Index");
+            }
             await _invManager.DeleteProduct(ID.GetValueOrDefault());
             return RedirectToPage("/Admin/Products/Index");
         }
