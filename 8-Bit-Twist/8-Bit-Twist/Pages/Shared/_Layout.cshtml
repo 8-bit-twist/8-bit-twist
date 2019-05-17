@@ -1,0 +1,77 @@
+﻿@{ 
+    string page = ViewContext.RouteData.Values["page"].ToString().Split('/')[0];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/Styles/Style.min.css" />
+
+    <!--Imports-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>
+            <a asp-controller="Home" asp-action="Index">8-Bit Twist</a>
+        </h1>
+        <div class="toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div id="greeting">
+                Hello, @User.Claims.First(c => c.Type == "FullName").Value!
+            </div>
+        }
+        <nav>
+            <ul>
+                <li>
+                    <a asp-controller="Users" asp-action="Logout">Logout</a>
+                </li>
+
+                <li class="deactivated">
+                    <a asp-page="/Profile/Index">Profile</a>
+                </li>
+
+                @if (User.IsInRole(ApplicationRoles.Admin))
+                {
+                    <li class="@(page == "Admin" ? "deactivated" : "")">
+                        <a asp-page="/Admin/Index">Admin</a>
+                    </li>
+                }
+
+                <li>
+                    <a asp-controller="Shop" asp-action="Basket">Basket</a>
+                </li>
+
+                <li>
+                    <a asp-controller="Shop" asp-action="Index">Browse</a>
+                </li>
+
+                @if (User.Claims.First(c => c.Type == "Computer").Value == "True")
+                {
+                    <li>
+                        <a asp-controller="Home" asp-action="Computer">11010001</a>
+                    </li>
+                }
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+
+    <script>
+        $(document).ready(function () {
+            $(".fa-bars").click(function () {
+                $("nav").toggle();
+            });
+        });
+    </script>
+</body>
+</html>

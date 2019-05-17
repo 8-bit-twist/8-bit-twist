@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _8_Bit_Twist.Data;
 
 namespace _8_Bit_Twist.Migrations
 {
     [DbContext(typeof(_8BitDbContext))]
-    partial class _8BitDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190513174348_ChangePrices")]
+    partial class ChangePrices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,20 +58,7 @@ namespace _8_Bit_Twist.Migrations
                     b.Property<string>("ApplicationUserID")
                         .IsRequired();
 
-                    b.Property<long>("CardNumber");
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<bool>("Completed");
-
-                    b.Property<string>("ShippingAddress")
-                        .IsRequired();
-
                     b.Property<decimal>("TotalPrice");
-
-                    b.Property<string>("Zip")
-                        .IsRequired();
 
                     b.HasKey("ID");
 
@@ -104,7 +93,8 @@ namespace _8_Bit_Twist.Migrations
 
                     b.Property<int>("Generation");
 
-                    b.Property<string>("ImgUrl");
+                    b.Property<string>("ImgUrl")
+                        .IsRequired();
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -127,7 +117,7 @@ namespace _8_Bit_Twist.Migrations
                             ID = 1,
                             Description = "The Nintendo Entertainment System (or NES for short) is an 8-bit home video game console developed and manufactured by Nintendo.",
                             Generation = 0,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/nes.png",
+                            ImgUrl = "/Assets/IMG/Consoles/NES_2Player_Pak__01818.1430494982.jpg",
                             Name = "Nintendo Entertainment System",
                             Price = 1.10m,
                             ReleaseDate = "1985-10-18",
@@ -138,10 +128,10 @@ namespace _8_Bit_Twist.Migrations
                             ID = 2,
                             Description = "The Game Boy is an 8-bit handheld game console developed and manufactured by Nintendo.",
                             Generation = 0,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/game-boy.png",
+                            ImgUrl = "/Assets/IMG/Consoles/250px-Game-Boy-FL.jpg",
                             Name = "Nintendo GameBoy",
                             Price = 0.70m,
-                            ReleaseDate = "1989-07-31",
+                            ReleaseDate = "1989-7-31",
                             SKU = "GB-111111"
                         },
                         new
@@ -149,10 +139,10 @@ namespace _8_Bit_Twist.Migrations
                             ID = 3,
                             Description = "The Sega Genesis, known as the Mega Drive in regions outside of North America, is a 16-bit home video game console developed and sold by Sega.",
                             Generation = 1,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/genesis.png",
+                            ImgUrl = "/Assets/IMG/Consoles/rBVaSlq7QaiAEpR4AADkruC3mkg294.jpg",
                             Name = "Sega Genesis",
                             Price = 0.90m,
-                            ReleaseDate = "1989-08-14",
+                            ReleaseDate = "1989-8-14",
                             SKU = "SG-111111"
                         },
                         new
@@ -160,10 +150,10 @@ namespace _8_Bit_Twist.Migrations
                             ID = 4,
                             Description = "The Super Nintendo Entertainment System (SNES), also known as the Super NES or Super Nintendo, is a 16-bit home video game console developed by Nintendo.",
                             Generation = 1,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/snes.png",
+                            ImgUrl = "/Assets/IMG/Consoles/71itkDwgyyL._SL1500_.jpg",
                             Name = "Super Nintendo Entertainment System",
                             Price = 1.75m,
-                            ReleaseDate = "1991-08-23",
+                            ReleaseDate = "1991-8-23",
                             SKU = "SNES-111111"
                         },
                         new
@@ -171,7 +161,7 @@ namespace _8_Bit_Twist.Migrations
                             ID = 5,
                             Description = "The Game Gear is an 8-bit fourth generation handheld game console released by Sega",
                             Generation = 1,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/game-gear.png",
+                            ImgUrl = "/Assets/IMG/Consoles/Game-Gear-Handheld.jpg",
                             Name = "Sega Game Gear",
                             Price = 0.50m,
                             ReleaseDate = "1985-10-18",
@@ -182,7 +172,7 @@ namespace _8_Bit_Twist.Migrations
                             ID = 6,
                             Description = "The Game Boy Color (GBC) is a handheld game console manufactured by Nintendo.",
                             Generation = 1,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/game-boy-color.png",
+                            ImgUrl = "/Assets/IMG/Consoles/300px-Nintendo-Game-Boy-Color-FL.jpg",
                             Name = "GameBoy Color",
                             Price = 1.00m,
                             ReleaseDate = "1998-11-18",
@@ -193,10 +183,10 @@ namespace _8_Bit_Twist.Migrations
                             ID = 7,
                             Description = "The PlayStation (officially abbreviated to PS, and commonly known as the PS1 or its codename, PSX) is a home video game console developed and marketed by Sony Computer Entertainment.",
                             Generation = 2,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/playstation.png",
+                            ImgUrl = "/Assets/IMG/Consoles/PSX-Console-wController.jpg",
                             Name = "Sony PlayStation One",
                             Price = 1.50m,
-                            ReleaseDate = "1995-09-09",
+                            ReleaseDate = "1995-9-9",
                             SKU = "PS-111111"
                         },
                         new
@@ -204,10 +194,10 @@ namespace _8_Bit_Twist.Migrations
                             ID = 8,
                             Description = "The Nintendo 64 (N64), stylized as NINTENDO64, is a home video game console developed and marketed by Nintendo. ",
                             Generation = 2,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/n64.png",
+                            ImgUrl = "/Assets/IMG/Consoles/n64.0.png",
                             Name = "Nintendo 64",
                             Price = 1.75m,
-                            ReleaseDate = "1996-09-26",
+                            ReleaseDate = "1996-9-26",
                             SKU = "N64-111111"
                         },
                         new
@@ -215,10 +205,10 @@ namespace _8_Bit_Twist.Migrations
                             ID = 9,
                             Description = "The Sega Saturn is a 32-bit home video game console developed by Sega.",
                             Generation = 2,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/saturn.png",
+                            ImgUrl = "/Assets/IMG/Consoles/1200px-Sega-Saturn-Console-Set-Mk1.jpg",
                             Name = "Sega Saturn",
                             Price = 2.00m,
-                            ReleaseDate = "1995-05-11",
+                            ReleaseDate = "1995-5-11",
                             SKU = "SS-111111"
                         },
                         new
@@ -226,7 +216,7 @@ namespace _8_Bit_Twist.Migrations
                             ID = 10,
                             Description = "The Game Boy Advance (GBA) is a 32-bit handheld video game console developed, manufactured and marketed by Nintendo as the successor to the Game Boy Color.",
                             Generation = 2,
-                            ImgUrl = "https://8bittwistblob.blob.core.windows.net/products/gb-advance.png",
+                            ImgUrl = "/Assets/IMG/Consoles/Nintendo-Game-Boy-Advance-Purple-FL.jpg",
                             Name = "GameBoy Advance",
                             Price = 1.50m,
                             ReleaseDate = "2001-11-6",

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8-Bit-Twist", "8-Bit-Twist\8-Bit-Twist.csproj", "{53E63C8D-3239-4075-9706-EB567F0683EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8-Bit-TwistTests", "8-Bit-TwistTests\8-Bit-TwistTests.csproj", "{AFF503E0-8AA0-4EB6-AC5C-0EC55A41D7D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "8-Bit-TwistTests", "8-Bit-TwistTests\8-Bit-TwistTests.csproj", "{AFF503E0-8AA0-4EB6-AC5C-0EC55A41D7D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

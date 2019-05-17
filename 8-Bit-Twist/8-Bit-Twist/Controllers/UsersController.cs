@@ -77,7 +77,7 @@ namespace _8_Bit_Twist.Controllers
                     await _userManager.AddClaimsAsync(user, claims);
 
                     // Add Roles to specific users
-                    if (user.Email.ToLower().Contains("@codefellows.com") || user.Email.ToLower() == "ntibbals@outlook.com" || user.Email.ToLower() == "andrew.l.roska@gmail.com")
+                    if (user.Email.ToLower().Contains("@codefellows.com") || user.Email.ToLower() == "ntibbals@outlook.com" || user.Email.ToLower() == "andrew.l.roska@gmail.com" || user.Email.ToLower() == "staylor.ben@gmail.com")
                     {
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
                     }
@@ -101,6 +101,12 @@ namespace _8_Bit_Twist.Controllers
                     Basket basket = await _bsktManager.CreateBasket(user.Id);
                     user.BasketID = basket.ID;
                     await _userManager.UpdateAsync(user);
+                    
+                    // If user is Admin, redirect to Admin dashboard
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToPage("/Admin/Index");
+                    }
 
                     // Redirect to home page
                     return RedirectToAction("Index", "Home");
@@ -117,7 +123,17 @@ namespace _8_Bit_Twist.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            if (_signInManager.IsSignedIn(User))
+            {
+                if (User.IsInRole(ApplicationRoles.Admin))
+                {
+                    return RedirectToPage("/Admin/Index");
+                }
+
+                else return RedirectToAction("Index", "Home");
+            }
+
+            else return View();
         }
 
         /// <summary>
@@ -135,7 +151,7 @@ namespace _8_Bit_Twist.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login");
                 }
 
                 ModelState.AddModelError(string.Empty, "Invalid Login Attempt");

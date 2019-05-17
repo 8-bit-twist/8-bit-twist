@@ -1,0 +1,109 @@
+﻿@page
+@model _8_Bit_Twist.Pages.Profile.IndexModel
+@{
+    ViewData["Title"] = "Profile";
+
+    ViewData["Title"] = "Admin Dashboard";
+    List<string> ignoredProps = new List<string> { "User", "OrderItems", "Completed" };
+    List<string> props = typeof(Order).GetProperties()
+        .Where(p => !ignoredProps.Contains(p.Name.ToString()))
+        .Select(p => p.Name.ToString())
+        .ToList();
+}
+
+<h2>Profile</h2>
+
+<section>
+    <form method="post">
+        <div>@Model.Message</div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div>
+            <label asp-for="PVM.EmailAddress"></label>
+            <input asp-for="PVM.EmailAddress" readonly="readonly" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.FirstName"></label>
+            <input asp-for="PVM.FirstName" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.LastName"></label>
+            <input asp-for="PVM.LastName" />
+        </div>
+
+        <hr />
+
+        <div>
+            <label asp-for="PVM.Password"></label>
+            <input asp-for="PVM.Password" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.NewPassword"></label>
+            <input asp-for="PVM.NewPassword" />
+        </div>
+
+        <div>
+            <label asp-for="PVM.ConfirmPassword"></label>
+            <input asp-for="PVM.ConfirmPassword" />
+        </div>
+
+        <hr />
+
+        <button type="submit">Submit</button>
+    </form>
+
+</section>
+
+<section>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Card Number</th>
+                <th>Shipping Address</th>
+                <th>City</th>
+                <th>Zip</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (Order order in Model.PVM.Orders)
+            {
+                <tr>
+                    @foreach (string prop in props)
+                    {
+                        var value = typeof(Order).GetProperty(prop).GetValue(order);
+
+                        switch (prop)
+                        {
+                            case "CardNumber":
+                                string num = ((long)value).ToString();
+                                num = num.Substring(num.Length - 4);
+                                value = $"************{num}";
+                                break;
+                            case "TotalPrice":
+                                value = $"${value}";
+                                break;
+                            case "ApplicationUserID":
+                                value = UserManager.Users.Where(u => u.Id == (string)value)
+                                    .FirstOrDefault().Email;
+                                break;
+                        }
+
+                        <td>
+                            @value
+                        </td>
+                    }
+                    <td>
+                        <a asp-page="/Admin/Order" asp-route-id="@order.ID">View Details</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

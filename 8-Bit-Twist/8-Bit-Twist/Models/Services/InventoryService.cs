@@ -21,14 +21,25 @@ namespace _8_Bit_Twist.Models.Services
             _context = context;
         }
 
-        public Task AddProduct(Product product)
+        /// <summary>
+        /// Adds a new Product to the Database.
+        /// </summary>
+        /// <param name="product">New Product to add.</param>
+        public async Task AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteProduct(Product product)
+        /// <summary>
+        /// Deletes a given Product.
+        /// </summary>
+        /// <param name="id">ID of Product to delete.</param>
+        public async Task DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            Product product = _context.Products.FirstOrDefault(x => x.ID == id);
+            _context.Products.Remove(product);
+            await _context.SaveChangesAsync();
         }
 
         /// <summary>
@@ -47,17 +58,39 @@ namespace _8_Bit_Twist.Models.Services
         /// <returns>A Product</returns>
         public async Task<Product> GetProductByID(int id)
         {
-            return await _context.Products.FindAsync(id);
+            Product product = await _context.Products.FirstOrDefaultAsync(x => x.ID == id);
+            return product;
         }
 
-        public Task<bool> ProductExists(int id)
+        public Product GetProductByIDGreedy(int id)
         {
-            throw new NotImplementedException();
+            return _context.Products.FirstOrDefault(x => x.ID == id);
         }
 
-        public Task UpdateProduct(Product product)
+        /// <summary>
+        /// Checks to see if a given Product by ID exists.
+        /// </summary>
+        /// <param name="id">ID to check for.</param>
+        /// <returns>True if Product exists.</returns>
+        public async Task<bool> ProductExists(int id)
         {
-            throw new NotImplementedException();
+            Product product = await _context.Products.FirstOrDefaultAsync(x => x.ID == id);
+
+            return product != null;
+        }
+
+        /// <summary>
+        /// Updates Product info in the DB.
+        /// </summary>
+        /// <param name="id">ID of Product to update.</param>
+        /// <param name="product">Product details for update.</param>
+        public async Task UpdateProduct(int id, Product product)
+        {
+            if (id == product.ID)
+            {
+                _context.Update(product);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
