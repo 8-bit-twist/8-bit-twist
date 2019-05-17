@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using _8_Bit_Twist.Models;
+using _8_Bit_Twist.Models.Interfaces;
 using _8_Bit_Twist.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,13 +20,15 @@ namespace _8_Bit_Twist.Pages.Profile
         readonly UserManager<ApplicationUser> _userManager;
         readonly SignInManager<ApplicationUser> _signInManager;
 
+        public IOrderManager _orderManager { get; }
         public ProfileViewModel PVM { get; set; } = new ProfileViewModel();
         public string Message { get; set; }
 
-        public IndexModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public IndexModel(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IOrderManager orderManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _orderManager = orderManager;
         }
 
         public async Task OnGet(string message)
@@ -35,6 +38,7 @@ namespace _8_Bit_Twist.Pages.Profile
             PVM.EmailAddress = appUser.UserName;
             PVM.FirstName = appUser.FirstName;
             PVM.LastName = appUser.LastName;
+            PVM.Orders = await _orderManager.GetOrders(appUser.Id, 5);
         }
 
         public async Task<IActionResult> OnPost(ProfileViewModel pvm)
