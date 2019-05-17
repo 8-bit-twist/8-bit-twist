@@ -1,0 +1,31 @@
+﻿@page
+@model _8_Bit_Twist.Pages.Profile.OrderModel
+
+@{
+    ViewData["Title"] = "Order";
+    var user = UserManager.Users.Where(u => u.Id == Model.Order.ApplicationUserID).FirstOrDefault();
+    string last4 = ((long)Model.Order.CardNumber).ToString();
+    last4 = last4.Substring(last4.Length - 4);
+}
+
+
+<h2>Details for Order #@Model.Order.ID</h2>
+<section>
+    <h4>User Name: @user.FirstName @user.LastName</h4>
+    <h4>User Email: @user.Email</h4>
+    <h4>Shipping Address: @Model.Order.ShippingAddress, @Model.Order.City @Model.Order.Zip</h4>
+    <h4>Card #: ************@last4</h4>
+    <h4>Order Total: $@Model.Order.TotalPrice</h4>
+</section>
+<hr />
+<h3>Order Items</h3>
+<hr />
+@foreach (var item in Model.Order.OrderItems)
+{
+    <section class="product">
+        <img src="@item.Product.ImgUrl" alt="@item.Product.Name" />
+        <h4>@item.Product.Name</h4>
+        <h3>Unit Cost: @item.Price, Quantity: @item.Quantity, Total: $@(item.Price * item.Quantity)</h3>
+    </section>
+}
+<a asp-page="/Profile/Index"><h2>Back</h2></a>

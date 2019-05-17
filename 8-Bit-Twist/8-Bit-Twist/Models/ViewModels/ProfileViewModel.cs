@@ -33,5 +33,7 @@ namespace _8_Bit_Twist.Models.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
         public string ConfirmPassword { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }
