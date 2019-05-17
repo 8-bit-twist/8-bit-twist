@@ -64,7 +64,6 @@ namespace _8_Bit_Twist.Controllers
 
             if (answer.Split(' ')[0] == "Successfully")
             {
-                _bsktManager.ClearBasket(basket.ID);
                 return RedirectToAction("Receipt", new { orderId = order.ID });
             }
 
@@ -82,6 +81,9 @@ namespace _8_Bit_Twist.Controllers
                 await SendReceipt(order);
                 order.Completed = true;
                 await _ordManager.UpdateOrder(order, order.ID);
+
+                Basket basket = await _bsktManager.GetBasket(order.ApplicationUserID);
+                await _bsktManager.ClearBasket(basket.ID);
             }
             
             return View(order);

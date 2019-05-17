@@ -21,5 +21,17 @@ namespace _8_Bit_Twist.Models.ViewModels
         [Required]
         [Display(Name = "Last Name")]
         public string LastName {get; set;}
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Old Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "New Password")]
+        public string NewPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm Password")]
+        public string ConfirmPassword { get; set; }
     }
 }
