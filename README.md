@@ -93,10 +93,15 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 ---------------------------
 
 ## Change Log
+
 1.0: *Initial Deployment* - 16 May 2019
+
 0.4: *Impliments Azure Blob storage for image files* - 12 May 2019
+
 0.3: *Adds AuthNet-enhanced checkout functionality* - 11 May 2019
+
 0.2: *Adds User Authentication, adds basket functionality, impliments SendGrid* - 08 May 2019
+
 0.1: *Basic store browsing functionality* - 01 May 2019
 
 ------------------------------
