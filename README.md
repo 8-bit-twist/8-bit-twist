@@ -35,9 +35,12 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 - ASP.Net Core
 - Entity Framework
 - MVC
-- xUnit
-- Azure
-- SendGrid
+- xUnit for unit tests
+- Azure for deployment and DB storage
+- Azure Blob for decentralized image storage
+- Azure DevOps for project management
+- SendGrid for automated emails
+- AuthNet for payment authorization
 
 ---------------------------------
 
@@ -46,7 +49,7 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 ### Overall Project Schema
 
 #### Product Database Schema
-![Product Database Schema](https://dev.azure.com/8-Bit-Twist/c4f8abbc-14a1-47e4-8712-e54fc0b376e0/_apis/git/repositories/773301b0-d668-4df1-a1dc-4d970332a194/Items?path=%2F8-Bit-Twist%2F8-Bit-Twist%2Fwwwroot%2FAssets%2FIMG%2F8Bit-Twist+ProductDB.png)
+![Product Database Schema](https://github.com/8-bit-twist/8-bit-twist/blob/Master/8-Bit-Twist/8-Bit-Twist/wwwroot/Assets/IMG/8Bit-Twist%20ProductDB.png)
 
 #### Model Properties and Requirements
 
@@ -64,7 +67,7 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 ---------------------------
 
 #### User Database Schema
-![User Database Schema](https://dev.azure.com/8-Bit-Twist/c4f8abbc-14a1-47e4-8712-e54fc0b376e0/_apis/git/repositories/773301b0-d668-4df1-a1dc-4d970332a194/Items?path=%2F8-Bit-Twist%2F8-Bit-Twist%2Fwwwroot%2FAssets%2FIMG%2F8Bit-Twist+UserDB.png)
+![User Database Schema](https://github.com/8-bit-twist/8-bit-twist/blob/Master/8-Bit-Twist/8-Bit-Twist/wwwroot/Assets/IMG/8Bit-Twist%20UserDB.png)
 
 #### Model Properties and Requirements
 
@@ -90,7 +93,11 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 ---------------------------
 
 ## Change Log
-1.0: *Initial Deployment* - 01 May 2019
+1.0: *Initial Deployment* - 16 May 2019
+0.4: *Impliments Azure Blob storage for image files* - 12 May 2019
+0.3: *Adds AuthNet-enhanced checkout functionality* - 11 May 2019
+0.2: *Adds User Authentication, adds basket functionality, impliments SendGrid* - 08 May 2019
+0.1: *Basic store browsing functionality* - 01 May 2019
 
 ------------------------------
 
