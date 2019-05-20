@@ -100,13 +100,15 @@ h4 {
 section {
   position: relative;
   width: 90%;
-  margin: auto;
   padding: 10px;
-  margin-top: 1.25vh;
+  margin: 0.625vh auto 0.625vh auto;
   border-radius: 10px;
   max-width: 960px;
   background-color: #CEC9CC;
   color: #211A21; }
+  section div {
+    margin-top: 0.3125vh;
+    margin-bottom: 0.3125vh; }
 
 nav ul li {
   float: right;
@@ -118,9 +120,23 @@ label, input {
   width: 40%;
   text-align: left; }
 
+input:read-only {
+  background-color: #908A99; }
+
 a, a:visited {
   color: inherit;
   text-decoration: none; }
+
+table {
+  width: 100%;
+  background-color: #908A99;
+  color: #211A21; }
+  table thead {
+    font-weight: bold; }
+  table * {
+    border: 1px solid #211A21; }
+  table a {
+    border: none; }
 
 .deactivated {
   pointer-events: none;
@@ -155,6 +171,12 @@ a, a:visited {
 #greeting {
   float: left;
   margin-left: 10px; }
+
+.backbtn {
+  background-color: #CEC9CC;
+  outline: 1px solid #908A99;
+  width: 100px;
+  margin: auto; }
 
 @media screen and (max-height: 540px) {
   body {

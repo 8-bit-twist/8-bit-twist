@@ -64,10 +64,11 @@ namespace _8_Bit_Twist.Controllers
         /// <param name="productId">The Product's Id.</param>
         [Authorize]
         [HttpPost]
-        public async Task AddToBasket(int productId)
+        public async Task<IActionResult> AddToBasket(int productId)
         {
             Basket basket = await _bsktManager.GetBasket(_userManager.GetUserId(User));
             await _bsktManager.AddBasketItem(productId, basket.ID);
+            return RedirectToAction("View", new { id = productId });
         }
 
         /// <summary>

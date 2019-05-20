@@ -1,7 +1,12 @@
 ﻿@{
     ViewData["Title"] = "8-Bit Twist";
 }
-
+@if (SignInManager.IsSignedIn(User))
+{
+    <h2>
+        Hello, @User.Claims.First(c => c.Type == "FullName").Value!
+    </h2>
+}
 <h2>Welcome to 8-Bit Twist!</h2>
 <h3 id="tagline">For all your retro gaming needs!</h3>
 <section>
@@ -10,10 +15,10 @@
     </p>
 </section>
 
-<section>
-    @if (SignInManager.IsSignedIn(User))
-    {
-        @await Component.InvokeAsync("CurrentBasket");
-    }
-</section>
+@if (SignInManager.IsSignedIn(User))
+{
+    <section>
+        @await Component.InvokeAsync("CurrentBasket")
+    </section>
+}
 

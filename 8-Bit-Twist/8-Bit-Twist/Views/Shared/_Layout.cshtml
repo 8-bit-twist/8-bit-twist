@@ -22,12 +22,6 @@
         <div class="toggle">
             <i class="fas fa-bars"></i>
         </div>
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <div id="greeting">
-                Hello, @User.Claims.First(c => c.Type == "FullName").Value!
-            </div>
-        }
         <nav>
             <ul>
                 @if (!SignInManager.IsSignedIn(User))
