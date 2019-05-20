@@ -51,7 +51,7 @@ Microsoft Visual Studio Community 2017 (Version 15.9.9), Microsoft Visual Studio
 ## Data Model
 
 #### Product Database Schema
-![Product Database Schema](https://github.com/8-bit-twist/8-bit-twist/blob/Master/8-Bit-Twist/8-Bit-Twist/wwwroot/Assets/IMG/8Bit-Twist%20ProductDB.png)
+![Product Database Schema](https://github.com/8-bit-twist/8-bit-twist/blob/Master/Assets/IMG/8Bit-Twist%20ProductDB.png)
 
 #### Model Properties and Requirements
 
