@@ -13,32 +13,20 @@
     {
         bool isInBasket = (bool)ViewData["IsInBasket"];
 
-        <button id="addtobasket" onclick="addToBasket(@Model.ID)"
-                class="@(isInBasket ? "deactivated" : "")">
+    <form method="post">
+        <button type="submit" asp-action="AddToBasket" asp-route-productId="@Model.ID"
+                id="addtobasket" class="@(isInBasket ? "deactivated" : "")">
             @(isInBasket ? "In Basket" : "Add To Basket")
-            </button>
-        }
+        </button>
+    </form>
+
+    }
 
 </section>
-<section>
-    @if (SignInManager.IsSignedIn(User))
-    {
-        @await Component.InvokeAsync("CurrentBasket");
-    }
-</section>
-
-<script>
-    function addToBasket(id) {
-        $('#addtobasket').toggleClass('deactivated').text('In Basket');
-        //TODO: AJAX request to add item to basket
-        $.ajax({
-            type: 'POST',
-            url: '/shop/addtobasket',
-            datatype: 'json',
-            data: { productId: id },
-            error: function () {
-                alert('Something went wrong!');
-            }
-        });
-    }
-</script>
+@if (SignInManager.IsSignedIn(User))
+{
+    <section>
+        @await Component.InvokeAsync("CurrentBasket")   
+    </section>
+}
+<a asp-action="Index"><h3 class="backbtn">(Back)</h3></a>

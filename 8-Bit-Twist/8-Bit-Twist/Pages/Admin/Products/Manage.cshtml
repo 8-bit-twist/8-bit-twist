@@ -5,48 +5,54 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit Product</title>
-</head>
-<body>
-    <h4>Edit Product Details</h4>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Edit Product</title>
+    </head>
+    <body>
+        <h2>Edit Product Details</h2>
 
-    <section class="product">
-        <img class="product" src="@Model.Product.ImgUrl" />
-        <form method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="All" class="text-danger"></div>
+        <section class="product">
+            <img class="product" src="@Model.Product.ImgUrl" />
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
 
-            <label asp-for="Image"></label>
-            <input asp-for="Image" type="file" />
+                <label asp-for="Image"></label>
+                <input asp-for="Image" type="file" />
 
-            <label asp-for="Product.Name"></label>
-            <input asp-for="Product.Name" value="@Model.Product.Name" />
-            <span asp-validation-for="Product.Name" class="text-danger"></span>
+                <label asp-for="Product.Name"></label>
+                <input asp-for="Product.Name" value="@Model.Product.Name" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
 
-            <label asp-for="Product.SKU"></label>
-            <input asp-for="Product.SKU" value="@Model.Product.SKU" />
-            <span asp-validation-for="Product.SKU" class="text-danger"></span>
+                <label asp-for="Product.SKU"></label>
+                <input asp-for="Product.SKU" value="@Model.Product.SKU" />
+                <span asp-validation-for="Product.SKU" class="text-danger"></span>
 
-            <label asp-for="Product.Price"></label>
-            <input asp-for="Product.Price" value="@Model.Product.Price" />
-            <span asp-validation-for="Product.Price" class="text-danger"></span>
+                <label asp-for="Product.Price"></label>
+                <input asp-for="Product.Price" value="@Model.Product.Price" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
 
-            <label asp-for="Product.ReleaseDate"></label>
-            <input asp-for="Product.ReleaseDate" value="@Model.Product.ReleaseDate" />
-            <span asp-validation-for="Product.ReleaseDate" class="text-danger"></span>
+                <label asp-for="Product.ReleaseDate"></label>
+                <input asp-for="Product.ReleaseDate" value="@Model.Product.ReleaseDate" />
+                <span asp-validation-for="Product.ReleaseDate" class="text-danger"></span>
 
-            <label asp-for="Product.Generation"></label>
-            <select asp-for="Product.Generation" asp-items="@Html.GetEnumSelectList<_8_Bit_Twist.Models.Generations>()"></select>
-            <span asp-validation-for="Product.Generation" class="text-danger"></span>
+                <label asp-for="Product.Generation"></label>
+                <select asp-for="Product.Generation" asp-items="@Html.GetEnumSelectList<_8_Bit_Twist.Models.Generations>()"></select>
+                <span asp-validation-for="Product.Generation" class="text-danger"></span>
 
-            <label asp-for="Product.Description"></label>
-            <textarea rows="6" asp-for="Product.Description">@Model.Product.Description</textarea>
-            <span asp-validation-for="Product.Description" class="text-danger"></span>
+                <label asp-for="Product.Description"></label>
+                <textarea rows="6" asp-for="Product.Description">@Model.Product.Description</textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
 
-            <button type="submit">Save changes</button>
-            <button type="submit" asp-page-handler="Delete">Delete Product</button>
-        </form>
-    </section>
-</body>
+                <button type="submit">Save changes</button>
+
+                @if (Model.ID != null)
+                {
+                    <button type="submit" asp-page-handler="Delete">Delete Product</button>
+                }
+            </form>
+        </section>
+
+        <a asp-page="/Admin/Products/Index"><h3 class="backbtn">(Back)</h3></a>
+    </body>
 </html>

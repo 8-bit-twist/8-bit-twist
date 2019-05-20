@@ -12,56 +12,69 @@
 <h2>Admin Dashboard</h2>
 
 <a asp-page="/Admin/Products/Index"><h4>View Inventory</h4></a>
+<hr />
 
+<h4>Last 10 Orders</h4>
 
-<h3>Last 10 Orders</h3>
-<section>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>User</th>
-                <th>Card Number</th>
-                <th>Shipping Address</th>
-                <th>City</th>
-                <th>Zip</th>
-                <th>Total Price</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (Order order in Model.RecentOrders)
-            {
+@if (Model.RecentOrders.Count > 0)
+{
+    <section>
+        <table>
+            <thead>
                 <tr>
-                    @foreach (string prop in props)
-                    {
-                        var value = typeof(Order).GetProperty(prop).GetValue(order);
-
-                        switch (prop)
-                        {
-                            case "CardNumber":
-                                string num = ((long)value).ToString();
-                                num = num.Substring(num.Length - 4);
-                                value = $"************{num}";
-                                break;
-                            case "TotalPrice":
-                                value = $"${value}";
-                                break;
-                            case "ApplicationUserID":
-                                value = UserManager.Users.Where(u => u.Id == (string)value)
-                                    .FirstOrDefault().Email;
-                                break;
-                        }
-
-                        <td>
-                            @value
-                        </td>
-                    }
-                    <td>
-                        <a asp-page="/Admin/Order" asp-route-id="@order.ID">View Details</a>
-                    </td>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Card Number</th>
+                    <th>Shipping Address</th>
+                    <th>City</th>
+                    <th>Zip</th>
+                    <th>Total Price</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</section>
+            </thead>
+
+            <tbody>
+                @foreach (Order order in Model.RecentOrders)
+                {
+                    <tr>
+                        @foreach (string prop in props)
+                        {
+                            var value = typeof(Order).GetProperty(prop).GetValue(order);
+
+                            switch (prop)
+                            {
+                                case "CardNumber":
+                                    string num = ((long)value).ToString();
+                                    num = num.Substring(num.Length - 4);
+                                    value = $"************{num}";
+                                    break;
+                                case "TotalPrice":
+                                    value = $"${value}";
+                                    break;
+                                case "ApplicationUserID":
+                                    value = UserManager.Users.Where(u => u.Id == (string)value)
+                                        .FirstOrDefault().Email;
+                                    break;
+                            }
+
+                            <td>
+                                @value
+                            </td>
+                        }
+                        <td>
+                            <a asp-page="/Admin/Order" asp-route-id="@order.ID">View Details</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+}
+
+else
+{
+    <section>
+        <h4>No orders have been placed.</h4>
+    </section>
+}
+

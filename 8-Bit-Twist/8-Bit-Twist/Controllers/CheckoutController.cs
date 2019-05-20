@@ -44,7 +44,7 @@ namespace _8_Bit_Twist.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Checkout()
+        public async Task<IActionResult> Index()
         {
             string userId = _userManager.GetUserId(User);
             Basket basket = await _bsktManager.GetBasket(userId);
@@ -67,7 +67,7 @@ namespace _8_Bit_Twist.Controllers
                 return RedirectToAction("Receipt", new { orderId = order.ID });
             }
 
-            return RedirectToAction("Checkout", cvm);
+            return RedirectToAction("Index", cvm);
         }
 
         [HttpGet]

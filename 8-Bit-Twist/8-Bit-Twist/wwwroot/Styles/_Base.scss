@@ -61,14 +61,18 @@ h4 {
 section {
     position: relative;
     width: 90%;
-    margin: auto;
     padding: 10px;
-    margin-top: 1.25vh;
+    margin: 0.625vh auto 0.625vh auto;
     border-radius: 10px;
     max-width: 960px;
 
     background-color: $lightgray;
     color: $darkgray;
+
+    div {
+        margin-top: 0.3125vh;
+        margin-bottom: 0.3125vh;
+    }
 }
 
 nav {
@@ -87,7 +91,30 @@ label, input {
     text-align: left;
 }
 
+input:read-only{
+    background-color: $medgray;
+}
+
 a, a:visited {
     color: inherit;
     text-decoration: none;
+}
+
+table {
+    width: 100%;
+    background-color: $medgray;
+    color: $darkgray;
+
+
+    thead {
+        font-weight: bold;
+    }
+
+    * {
+        border: 1px solid $darkgray;
+    }
+
+    a {
+        border: none;
+    }
 }

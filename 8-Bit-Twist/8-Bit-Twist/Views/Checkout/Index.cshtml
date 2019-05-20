@@ -1,0 +1,41 @@
+﻿@model _8_Bit_Twist.Models.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Checkout</h2>
+
+@await  Component.InvokeAsync("CurrentBasket")
+
+<section>
+    <form method="post" asp-action="MakePayment">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div>
+            <label asp-for="ShippingAddress"></label>
+            <input asp-for="ShippingAddress" />
+            <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="City"></label>
+            <input asp-for="City" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="Zip"></label>
+            <input asp-for="Zip" />
+            <span asp-validation-for="Zip" class="text-danger"></span>
+        </div>
+
+        <div>
+            <label asp-for="CardNumber"></label>
+            <select asp-for="CardNumber" asp-items="@Html.GetEnumSelectList<_8_Bit_Twist.Models.CCNumbers>()"></select>
+        </div>
+
+        <div>
+            <button type="submit">Checkout</button>
+        </div>       
+    </form>
+</section>
+
